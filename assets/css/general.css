@@ -1,0 +1,12 @@
+.campo_requerido{
+  color: red;
+  font-weight: bold;
+
+}
+
+.sin_resultados{
+	color: red;
+	background-color: rgba(221, 75, 57, 0.19) ;
+	border: 1px solid rgba(215, 57, 37, 0.16);
+	padding: 5px 5px 5px 15px;
+}

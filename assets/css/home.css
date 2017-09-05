@@ -1,0 +1,94 @@
+.small-box .icon{
+
+  font-size:60px;
+}
+
+.btn-danger{
+  background-color: #B31B09;
+}
+
+#loading_email_principal{
+  display: none;  
+}
+
+.validar_email_cuenta{
+  display: none;  
+}
+
+.asociar_email_cuenta{
+  display: none;  
+}
+
+.validar_telefono_cuenta{
+  display: none;  
+}
+
+.asociar_telefono_cuenta{
+  display: none;  
+}
+
+  .ui-dialog 
+  {
+
+    z-index: 22
+  }
+
+#dialog_confirm{
+        display: none;
+        width:500px;
+  }
+
+#dialog_validar_email{
+        display: none;
+        width:500px;
+  }
+
+
+#div_loadding_pagar{
+   display: none;
+}
+
+#dialog_cancelar_solicitud_cobro{
+        display: none;
+        width:500px;
+  }
+
+#dialog_pagar_solicitud{
+        display: none;
+        width:1000px;
+  }
+
+#dialog_rechazar_solicitud{
+        display: none;
+        width:1000px;
+  }
+
+#div_loadding_rechazar_solicitar_cobro{
+        display: none;
+ 
+  }
+
+.ui-widget-overlay{
+  opacity: .8;
+  z-index: 100;
+  background: rgba(6, 6, 6, 1);
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 1000; /* some high enough value so it will render on top */
+  opacity: .5;
+  filter: alpha(opacity=50);
+}
+
+.ui-dialog{
+  box-shadow: 2px 5px 5px #000;
+  width: 500px;
+}
+
+.ui-dialog .ui-dialog-titlebar{
+  background: #3c8dbc;
+}
+
+.ui-dialog-titlebar-close{
+     display: none;
+  }
