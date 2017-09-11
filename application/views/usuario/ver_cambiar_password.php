@@ -42,8 +42,8 @@
                                   <? 
                                     $data = array(
                                             'type'  => 'text',
-                                            'name'  => 'password_actual',
-                                            'id'    => 'password_actual', 
+                                            'name'  => 'password_anterior',
+                                            'id'    => 'password_anterior', 
                                             'class' => 'form-control'
                                     );
 
@@ -51,7 +51,7 @@
 
                                   ?>
                               </div>
-                              <? echo mostrar_error_formulario($error, 'password_actual');?>
+                              <? echo mostrar_error_formulario($error, 'password_anterior');?>
                           </div>
                           
                        
@@ -63,8 +63,8 @@
                                   <? 
                                     $data = array(
                                             'type'  => 'text',
-                                            'name'  => 'nuevo_password',
-                                            'id'    => 'nuevo_password' ,
+                                            'name'  => 'password_nuevo',
+                                            'id'    => 'password_nuevo' ,
                                             'class' => 'form-control'
                                     );
 
@@ -72,7 +72,7 @@
 
                                   ?>
                               </div>
-                              <? echo mostrar_error_formulario($error, 'nuevo_password');?>
+                              <? echo mostrar_error_formulario($error, 'password_nuevo');?>
                           </div>
 
                          

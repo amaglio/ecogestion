@@ -53,23 +53,23 @@ jq_va(function(){
         ignore: "",
         rules :{
 
-                password_actual : {
+                password_anterior : {
                     required : true
                 },
-                nuevo_password : {
+                password_nuevo : {
                     required : true
                 },
                 repite_nuevo_password : {
                     required : true,
-                     equalTo: "#nuevo_password",
+                     equalTo: "#password_nuevo",
                 } 
         },
         messages : {  
 
-                password_actual : {
+                password_anterior : {
                      required : "Debe ingresar su password actual"
                 },
-                nuevo_password : {
+                password_nuevo : {
                     required : "Debe ingresar su nuevo password"
                 },
                 repite_nuevo_password : {

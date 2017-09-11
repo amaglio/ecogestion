@@ -144,6 +144,30 @@ $config = array(
                                         )
                                 ),
 
+            'cambiar_password' => array(
+
+                                    array(
+                                            'field' => 'password_anterior',
+                                            'label' => 'password_anterior',
+                                            'rules' => 'required|trim|xss_clean'
+                                        ),
+                                    array(
+                                            'field' => 'password_nuevo',
+                                            'label' => 'password_nuevo',
+                                            'rules' => 'required|trim|xss_clean'
+                                        ),
+                                    array(
+                                            'field' => 'repite_nuevo_password',
+                                            'label' => 'repite_nuevo_password',
+                                            'rules' => 'required|trim|xss_clean|matches[password_nuevo]'
+                                        ),
+                                    array(
+                                        'field' => 'alias',
+                                        'label' => 'alias',
+                                        'rules' => 'required|trim|xss_clean'
+                                    )
+                                ),
+
 // --------------------------------- ROL ------------------------------
 
             'alta_rol' => array(

@@ -376,6 +376,68 @@ public function asignar_roles_usuario() // TERMINAR
 	redirect("usuario/usuario/".$this->input->post('id_usuario')); 
 }
 
+public function cambiar_password()
+{
+	chrome_log("cambiar_password");
+
+	$_POST['alias'] = $this->session->userdata('eco_usuario');
+	$this->form_validation->set_data($_POST);
+
+	if ($this->form_validation->run('cambiar_password') == FALSE):  
+
+		chrome_log("No Paso validacion");
+	 	$mensaje['mensaje'] = 'No pasó la validación, intente nuevamente';
+		$mensaje['clase_mensaje'] = 'danger';
+		$this->session->set_flashdata('error', $this->form_validation->error_array());
+		var_dump($this->form_validation->error_array());
+	 
+	else:
+		chrome_log("Si Paso validacion");
+	 
+		$query = $this->Usuario_model->cambiar_password( $this->input->post() );
+		 
+		if ( $query['codigo_error'] == 0 ): // OK
+		 
+ 			$mensaje['mensaje'] =  'Password modificado exitosamente';
+			$mensaje['clase_mensaje'] = 'success';
+					 				 
+		else:  
+		 	
+		 	$mensaje['clase_mensaje'] = 'danger';
+		 
+		 	switch ($query['codigo_error']) 
+		 	{
+
+		 		case -1: 
+
+		 		 	$mensaje['mensaje'] = 'Error: ha ocurrido un error interno, intente nuevamente';
+		 			break;
+
+		 		case 1: 
+
+		 			$mensaje['mensaje'] = 'Error: usuario inexistente';
+		 			break;
+		 		
+		 		case 2:  
+
+		 			$mensaje['mensaje'] = 'Error: clave actual incorrecta';
+		 			break;
+
+		 		case 2:  
+
+		 			$mensaje['mensaje'] = 'Error: la clave actual y la nueva deben ser distintas';
+		 			break;
+		 	}
+			 
+
+		endif;  
+
+
+	endif; 
+
+	$this->session->set_flashdata('mensaje',$mensaje);
+	redirect("usuario/ver_cambiar_password");
+}
 // ----> VALIDAN FORM VALIDATION --->
 
 public function existe_usuario_validation($id_usuario=null)
