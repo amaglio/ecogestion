@@ -8,6 +8,7 @@ public function __construct()
 	parent::__construct();
 	
 	$this->load->model('Trabajo_model');
+	$this->load->model('Area_model');
 }
 
 // ----> MUESTRAN --->
@@ -17,7 +18,8 @@ public function index()
  	$datos['trabajos'] =  $this->Trabajo_model->traer_trabajos();
  	
  	$datos['mensaje'] = $this->session->flashdata('mensaje');
-	$datos['error_trabajo'] = $this->session->flashdata('error_trabajo');
+	$datos['error'] = $this->session->flashdata('error');
+	$datos['areas'] = $this->Area_model->traer_areas();
 
 	$this->load->view('estructura/head');
 	$this->load->view('trabajo/index',$datos);

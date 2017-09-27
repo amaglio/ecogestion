@@ -54,6 +54,48 @@
                         </div>
                     </div>
 
+                     <div class="form-group has-feedback">
+                        <label for="nombre_area"  class="col-sm-3 control-label">Area</label>
+                        <div class="col-sm-9">
+                            <span style="right: -10px;" class="campo_requerido  form-control-feedback">*</span>
+ 
+                            <?  $area = array(); ?>
+
+                            <?  $area[''] = 'Seleccionar Area'; ?>
+                            
+                            <?  foreach ($areas->result() as $row):  
+
+                                    $area[$row->id_area] = $row->nombre;
+
+                                endforeach; 
+
+                              echo form_dropdown('id_area', $area, '' ,'class="form-control" id="id_area" name="id_area" ' ); 
+
+                            ?>
+                        </div>
+                        <? echo mostrar_error_formulario($error, 'id_area');?>
+                    </div>
+
+                     <div class="form-group has-feedback">
+                        <label for="id_trabajo_tango"  class="col-sm-3 control-label">ID trabajo Tango</label>
+                        <div class="col-sm-9">
+                            <span style="right: -10px;" class="campo_requerido  form-control-feedback">*</span>
+ 
+                            <? 
+                              $data = array(
+                                      'type'  => 'text',
+                                      'name'  => 'id_trabajo_tango',
+                                      'id'    => 'id_trabajo_tango', 
+                                      'class' => 'form-control'
+                              );
+
+                              echo form_input($data);
+
+                            ?>
+                        </div>
+                        <? echo mostrar_error_formulario($error, 'id_trabajo_tango');?>
+                    </div>
+
               
 
                    <div class="col-xs-12" style="margin-top:20px; margin-bottom:20px" >
@@ -86,6 +128,7 @@
                                 <th>Id</th>
                                 <th>Id tango</th>   
                                 <th>Descripción </th>  
+                                <th>Area </th>  
                                 <th> </th>                                    
                             </tr>
                           </thead>  
@@ -95,7 +138,8 @@
 
                             <tr>
                               <td> <?=$row->id_trabajo?> </td>
-                              <td> <?=$row->nombre?> </td> 
+                              <td> <?=$row->descripcion?> </td> 
+                              <td> <?=$row->nombre_area?> </td>
                               <td> 
                                   <a href="<?=base_url()?>index.php/trabajo/trabajo/<?=$row->id_trabajo?>"><i class="fa fa-2x fa-binoculars" aria-hidden="true"></i></a>
                               </td>

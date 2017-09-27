@@ -13,8 +13,9 @@ public function __construct()
 function traer_trabajos()
 {
 
-	$sql =	"	SELECT *
-    			FROM trabajo r   "  ;
+	$sql =	"	SELECT t.*, a.nombre as nombre_area
+    			FROM trabajo t, area a
+                WHERE t.id_area = a.id_area "  ;
 	
 	$query = $this->db->query( $sql );
 
