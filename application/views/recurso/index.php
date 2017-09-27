@@ -15,7 +15,10 @@
     </section>
     <div class="panel-body">
         
-        <? mensaje_resultado($mensaje); ?>
+        <? mensaje_resultado($mensaje);
+
+
+         ?>
         
         <!-- Crear usuario -->
         <div class="col-md-5">
@@ -35,7 +38,7 @@
                     $attributes = array('class' => 'form', 'id' => 'form_alta_recurso', 'name' => 'form_alta_recurso');
                     echo form_open('recurso/alta_recurso', $attributes); ?>
 
-                     <div class="col-sm-12 ">
+                    <div class="col-sm-12 ">
                         <label for="nombre_recurso"  class="col-sm-3 control-label">Recurso</label>
                         <div class="col-sm-9">
                             <span style="right: -10px;" class="campo_requerido  form-control-feedback">*</span>
@@ -55,8 +58,28 @@
                         <? echo mostrar_error_formulario($error, 'nombre_recurso');?>
                     </div>
 
+                    <div class="col-sm-12 ">
+                        <label for="nombre_recurso"  class="col-sm-3 control-label">Unidad Medida</label>
+                        <div class="col-sm-9">
+                            <span style="right: -10px;" class="campo_requerido  form-control-feedback">*</span>
+ 
+                            <? 
+                              $data = array(
+                                      'type'  => 'text',
+                                      'name'  => 'nombre_recurso',
+                                      'id'    => 'nombre_recurso', 
+                                      'class' => 'form-control'
+                              );
+
+                              echo form_input($data);
+
+                            ?>
+                        </div>
+                        <? echo mostrar_error_formulario($error, 'nombre_recurso');?>
+                    </div>
+
                     <div class="col-xs-12" style="margin-top:20px; margin-bottom:20px" >
-                      <button disabled="disabled" type="submit" class="btn btn-primary btn-block"> Aceptar <div id="div_loadding_cargar_recurso" class="form-control-feedback"  style='margin-right:25px'><img src="<?=base_url()?>assets/images/loading_azul.gif" ></div>  </button>   
+                      <button  type="submit" class="btn btn-primary btn-block"> Aceptar <div id="div_loadding_cargar_recurso" class="form-control-feedback"  style='margin-right:25px'><img src="<?=base_url()?>assets/images/loading_azul.gif" ></div>  </button>   
                     </div>
 
                     <? echo form_close(); ?>
@@ -72,7 +95,7 @@
 
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">recursos</h3>
+                    <h3 class="box-title">Recursos</h3>
                     <div class="box-tools pull-right">
                       <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                       <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -85,18 +108,24 @@
 
                             <tr style="background-color: rgba(60, 141, 188, 0.35);">
                                 <th>ID</th>
-                                <th>recurso</th>
-                                <th></th> 
-                                <th></th>                                 
+                                <th>Recurso</th>
+                                <th>Unidad Medida</th> 
+                                <th></th>  
+                                <th></th>                                
                             </tr>
                           </thead>  
                           <tbody>
 
-                            <? foreach ($recursos->result() as $row): ?>
+                            <? 
+
+                            foreach ($recursos->result() as $row): 
+
+                             ?>
 
                               <tr>
-                                <td> <?=$row->id_recurso?> </td>
-                                <td> <?=$row->descripcion?> </td> 
+                                <td> <?php echo $row->id_recurso; ?> </td>
+                                <td> <?php echo $row->descripcion; ?> </td> 
+                                <td> <?php echo $row->unidad_medida; ?> </td> 
                                 <td> 
                                     <a href="<?=base_url()?>index.php/recurso/recurso/<?=$row->id_recurso?>"><i class="fa fa-2x fa-binoculars" aria-hidden="true"></i></a>
                                 </td>

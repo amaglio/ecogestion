@@ -18,7 +18,7 @@ public function index()
 
 	$this->load->view('estructura/head');	
 	$this->load->view('recurso/index',$datos);
-	$this->load->view('estructura/footer');  
+	$this->load->view('estructura/footer'); 
 }
 
 public function recurso($id_recurso=NULL) // Ver recurso

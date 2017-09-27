@@ -13,9 +13,10 @@ public function traer_recursos()
 {
     
     $sql =  "   SELECT *
-                FROM recurso r "  ;
+                FROM recurso"  ;
     
     $query = $this->db->query( $sql );
+ 
 
     return $query;  
 

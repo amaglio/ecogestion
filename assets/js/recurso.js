@@ -69,21 +69,22 @@ jq_va(function(){
 });  
 
  
-
+ 
+  
 //---- Tabla recursos ----
   
 jq_dt(document).ready(function() {
-    jq_dt('#tabla_recurso').dataTable({
+    jq_dt('#tabla_recursos').dataTable({
                 "paging":   true,
                 "ordering": true,
                 "info":     true,
                 "bFilter": true,
                 "language": {
-                    "lengthMenu": "Mostrando _MENU_ recursos por pagina.",
-                    "zeroRecords": "Ningun recurso fue encontrado.",
+                    "lengthMenu": "Mostrando _MENU_ ramas por pagina.",
+                    "zeroRecords": "Ningun rama fue encontrado.",
                     "info": "<b> Mostrando pagina _PAGE_ de _PAGES_ </b>",
-                    "infoEmpty": "Ningun recurso disponible",
-                    "infoFiltered": "(Filtrado de _MAX_ recursos totales)",
+                    "infoEmpty": "Ningun rama disponible",
+                    "infoFiltered": "(Filtrado de _MAX_ ramas totales)",
                     "sSearch": " Buscar    ",
                     "oPaginate": {
                                     "sNext": "Pag. sig.",
