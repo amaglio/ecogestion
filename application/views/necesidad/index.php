@@ -22,7 +22,7 @@
       <div class="col-md-5">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Crear Trabajo</h3>
+                    <h3 class="box-title">Crear Necesidad</h3>
                     <div class="box-tools pull-right">
                       <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                       <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -34,8 +34,50 @@
                     $attributes = array('class' => 'form', 'id' => 'form_alta_necesidad', 'name' => 'form_alta_necesidad');
                     echo form_open('necesidad/alta_necesidad', $attributes); ?>
 
- 
                     <div class="form-group has-feedback">
+                        <label for="Trabajo"  class="col-sm-3 control-label">Trabajo</label>
+                        <div class="col-sm-9">
+                            <span style="right: -10px;" class="campo_requerido  form-control-feedback">*</span>
+ 
+                            <?  $trabajo = array(); ?>
+
+                            <?  $trabajo[''] = 'Seleccionar trabajo'; ?>
+                            
+                            <?  foreach ($trabajos->result() as $row):  
+
+                                    $trabajo[$row->id_trabajo] = $row->id_trabajo."-".$row->descripcion;
+
+                                endforeach; 
+
+                              echo form_dropdown('id_trabajo', $trabajo, '' ,'class="form-control" id="id_trabajo" name="id_trabajo" ' ); 
+
+                            ?>
+                        </div>
+                        <? echo mostrar_error_formulario($error, 'id_trabajo');?>
+                    </div>
+
+                    <div class="form-group has-feedback">
+                        <label for="fecha_limite"  class="col-sm-3 control-label">Fecha </label>
+                        <div class="col-sm-9">
+                            <span style="right: -10px;" class="campo_requerido  form-control-feedback">*</span>
+ 
+                            <? 
+                              $data = array(
+                                      'type'  => 'date',
+                                      'name'  => 'fecha_limite',
+                                      'id'    => 'fecha_limite', 
+                                      'class' => 'form-control'
+                              );
+
+                              echo form_input($data);
+
+                            ?>
+                        </div>
+                        <? echo mostrar_error_formulario($error, 'fecha_limite');?>
+                    </div>
+
+ 
+                    <div class="form-group has-feedback" style="margin-top: 10px">
                         <label for="necesidad"  class="col-sm-3 class-label">Descripción</label>
                         <div class="col-sm-9"> 
 
@@ -84,8 +126,10 @@
 
                             <tr style="background-color: rgba(60, 141, 188, 0.35);">
                                 <th>Id</th>
-                                <th>Id tango</th>   
-                                <th>Descripción </th>  
+                                <th>Trabajo</th>   
+                                <th>Comentario </th>  
+                                <th>Fecha Limite </th>
+                                <th> </th> 
                                 <th> </th>                                    
                             </tr>
                           </thead>  
@@ -95,7 +139,9 @@
 
                             <tr>
                               <td> <?=$row->id_necesidad?> </td>
-                              <td> <?=$row->nombre?> </td> 
+                              <td> <?=$row->descripcion_trabajo?> </td> 
+                              <td> <?=$row->comentario?> </td>
+                              <td> <?=$row->fecha_limite?> </td>  
                               <td> 
                                   <a href="<?=base_url()?>index.php/necesidad/necesidad/<?=$row->id_necesidad?>"><i class="fa fa-2x fa-binoculars" aria-hidden="true"></i></a>
                               </td>

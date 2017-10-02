@@ -13,8 +13,9 @@ public function __construct()
 function traer_necesidades()
 {
 
-	$sql =	"	SELECT *
-    			FROM necesidad r   "  ;
+	$sql =	"	SELECT r.*, CONCAT(t.id_trabajo, '- ', t.descripcion) as descripcion_trabajo
+    			FROM necesidad r, trabajo t
+                WHERE r.id_trabajo = t.id_trabajo   "  ;
 	
 	$query = $this->db->query( $sql );
 

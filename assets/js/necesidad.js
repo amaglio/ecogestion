@@ -6,13 +6,17 @@ jq_va(function(){
     jq_va('#form_alta_necesidad').validate({
         ignore: "",
         rules :{
-
+                id_trabajo : {
+                    required : true
+                },
                 descripcion : {
                     required : true
                 } 
         },
         messages : {  
-
+                id_trabajo : {
+                     required : "Debe seleccionar el trabajo"
+                },
                 descripcion : {
                      required : "Debe ingresar el nombre del necesidad"
                 } 

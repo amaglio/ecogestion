@@ -416,6 +416,14 @@ $config = array(
                                         )
                                 ),
 
+// --------------------------------- NECESIDADES ------------------------------
+             'ver_necesidad' => array(
+                                     array(
+                                            'field' => 'id_necesidad',
+                                            'label' => 'id_necesidad',
+                                            'rules' => 'required|trim|xss_clean|is_numeric|callback_existe_necesidad_validation'
+                                        )
+                                ),
 
 );
 

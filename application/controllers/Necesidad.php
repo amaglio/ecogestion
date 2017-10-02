@@ -7,6 +7,7 @@ public function __construct()
 {
 	parent::__construct();
 	$this->load->model('Necesidad_model');
+	$this->load->model('Trabajo_model');
 }
 
 public function index()
@@ -15,6 +16,7 @@ public function index()
 	$datos['error'] = $this->session->flashdata('error');
 
 	$datos['necesidades'] = $this->Necesidad_model->traer_necesidades();
+	$datos['trabajos'] =  $this->Trabajo_model->traer_trabajos();
 
 	$this->load->view('estructura/head');	
 	$this->load->view('necesidad/index',$datos);
@@ -25,23 +27,26 @@ public function necesidad($id_necesidad=NULL) // Ver necesidad
 {
 	$_POST['id_necesidad'] = $id_necesidad;
 	$this->form_validation->set_data($_POST);
-	$this->form_validation->set_message('existe_necesidad_validation', 'El necesidad no existe');	
+	$this->form_validation->set_message('existe_necesidad_validation', 'La necesidad no existe');	
 
 	if ($this->form_validation->run('ver_necesidad') == FALSE):  
 
 		chrome_log("No Paso validacion");
+		//echo validation_errors();
+	 
 		$mensaje['mensaje'] = 'No pasó la validación, intente nuevamente';
 		$mensaje['clase_mensaje'] = 'danger';
 
 	 	$this->session->set_flashdata('mensaje', $mensaje);
 		$this->session->set_flashdata('error', $this->form_validation->error_array());	 
 		redirect("necesidad/index");
-
+ 
 	else:
 
+		chrome_log("Paso validacion");
 		$datos['mensaje'] = $this->session->flashdata('mensaje');
 		$datos['error'] = $this->session->flashdata('error');
-
+		$datos['trabajos'] =  $this->Trabajo_model->traer_trabajos();
 		$datos['necesidad'] = $this->Necesidad_model->traer_informacion_necesidad($id_necesidad);
 
 
@@ -50,7 +55,7 @@ public function necesidad($id_necesidad=NULL) // Ver necesidad
 		$this->load->view('estructura/footer');  
 
 	endif;
-}
+}	
 
 public function alta_necesidad()
 {
