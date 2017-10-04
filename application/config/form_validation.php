@@ -425,6 +425,16 @@ $config = array(
                                         )
                                 ),
 
+// --------------------------------- TRABAJO ------------------------------
+             'ver_trabajo' => array(
+                                     array(
+                                            'field' => 'id_trabajo',
+                                            'label' => 'id_trabajo',
+                                            'rules' => 'required|trim|xss_clean|is_numeric|callback_existe_trabajo_validation'
+                                        )
+                                ),
+
+
 );
 
 

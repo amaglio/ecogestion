@@ -9,12 +9,18 @@ jq_va(function(){
 
                 descripcion : {
                     required : true
-                } 
+                },
+                id_area : {
+                    required : true
+                }
         },
         messages : {  
 
                 descripcion : {
                      required : "Debe ingresar el nombre del trabajo"
+                },
+                id_area : {
+                     required : "Debe seleccionar el area"
                 } 
         },
         submitHandler: function(form) {
@@ -35,7 +41,7 @@ jq_va(function(){
                 id_trabajo : {
                     required : true
                 },
-                trabajo : {
+                id_area : {
                     required : true
                 }
         },
@@ -44,8 +50,8 @@ jq_va(function(){
                 id_trabajo : {
                      required : "Debe estar el id del trabajo"
                 },
-                trabajo : {
-                     required : "Debe ingresar el nombre del trabajo"
+                id_area : {
+                     required : "Debe seleccionar el area"
                 }
         },
         submitHandler: function(form) {

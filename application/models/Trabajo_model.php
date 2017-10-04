@@ -26,9 +26,10 @@ function traer_trabajos()
 function traer_informacion_trabajo($id_trabajo)
 {
 
-	$sql =	"	SELECT *
-    			FROM trabajo r 
-    			WHERE id_trabajo = ? "  ;
+	$sql =	"	SELECT t.*, a.nombre as nombre_area
+                FROM trabajo t, area a
+                WHERE t.id_area = a.id_area
+                AND t.id_trabajo = ? "  ;
 	
 	$query = $this->db->query( $sql, array( $id_trabajo ));
 

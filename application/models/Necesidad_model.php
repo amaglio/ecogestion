@@ -23,6 +23,19 @@ function traer_necesidades()
 }
 
 
+function traer_necesidades_trabajo($id_trabajo)
+{
+
+    $sql =  "   SELECT r.*, CONCAT(t.id_trabajo, '- ', t.descripcion) as descripcion_trabajo
+                FROM necesidad r, trabajo t
+                WHERE r.id_trabajo = t.id_trabajo   "  ;
+    
+    $query = $this->db->query( $sql );
+
+    return $query;  
+}
+
+
 function traer_informacion_necesidad($id_necesidad)
 {
 

@@ -129,6 +129,7 @@
                                 <th>Id tango</th>   
                                 <th>Descripción </th>  
                                 <th>Area </th>  
+                                <th> </th>  
                                 <th> </th>                                    
                             </tr>
                           </thead>  
@@ -138,6 +139,7 @@
 
                             <tr>
                               <td> <?=$row->id_trabajo?> </td>
+                              <td> <?=$row->id_trabajo_tango?> </td>
                               <td> <?=$row->descripcion?> </td> 
                               <td> <?=$row->nombre_area?> </td>
                               <td> 

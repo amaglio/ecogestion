@@ -9,6 +9,7 @@ public function __construct()
 	
 	$this->load->model('Trabajo_model');
 	$this->load->model('Area_model');
+	$this->load->model('Necesidad_model');
 }
 
 // ----> MUESTRAN --->
@@ -46,9 +47,10 @@ public function trabajo($id_trabajo)
 
 		$datos['mensaje'] = $this->session->flashdata('mensaje');
 		$datos['error'] = $this->session->flashdata('error');
-
+		$datos['areas'] = $this->Area_model->traer_areas();
 		$datos['informacion_trabajo'] =  $this->Trabajo_model->traer_informacion_trabajo($id_trabajo);
-		$datos['trabajos'] =  $this->Trabajo_model->traer_trabajos(); 
+		
+		$datos['necesidades_trabajo'] =  $this->Necesidad_model->traer_necesidades_trabajo($id_trabajo); 
 	 
 		$this->load->view('estructura/head');
 		$this->load->view('trabajo/ver_trabajo',$datos);

@@ -5,12 +5,16 @@
    #div_loadding_modificar_trabajo{
         display: none; 
     }
+
+  #div_loadding_crear_necesidad{
+        display: none; 
+    }  
 </style>
 
 <div class="content-wrapper">
     <section class="content-header">
       <h4>
-        <i class="fa fa-tags" aria-hidden="true"></i> Trabajo / <?=$informacion_trabajo->nombre?>
+        <i class="fa fa-tags" aria-hidden="true"></i> Trabajo / <?=$informacion_trabajo->id_trabajo?>
       </h4>
     </section>
     <div class="panel-body">
@@ -20,12 +24,13 @@
               <i class="fa fa-1x fa-times" aria-hidden="true" style="padding-left:5px"></i> Eliminar trabajo
           </button>
         </div>
-
-      	<!-- Ver trabajo -->
+ 
+      	<!-- Ver trabajo Y crear -->
       	<div class="col-md-5">
+            <!-- Ver trabajo  -->
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Ver Rol</h3>
+                    <h3 class="box-title">Ver Trabajo</h3>
                     <div class="box-tools pull-right">
                       <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                       <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -41,221 +46,94 @@
 
  
                     <div class="form-group has-feedback">
-                        <label for="trabajo"  class="col-sm-3 conttrabajo-label">Rol</label>
+                        <label for="id_trabajo"  class="col-sm-3 control-label">ID</label>
                         <div class="col-sm-9">
-                            <span style="right: -10px;" class="campo_requerido  form-conttrabajo-feedback">*</span>
+                            <span style="right: -10px;" class="campo_requerido  form-control-feedback">*</span>
 
                             <?
 
                               $data = array(
-                                      'type'  => 'hidden',
+                                      'type'  => 'text',
                                       'name'  => 'id_trabajo',
                                       'id'    => 'id_trabajo',
                                       'value' => $informacion_trabajo->id_trabajo,
-                                      'class' => 'form-conttrabajo'
+                                      'readonly'  => 'readonly',
+                                      'class' => 'form-control'
                               );
 
                               echo form_input($data);
                              ?>
+                        </div>
+                    </div>
 
-                            <? 
+                    <div class="form-group has-feedback">
+                        <label for="id_trabajo_tango"  class="col-sm-3 control-label">ID tango</label>
+                        <div class="col-sm-9">
+                            <span style="right: -10px;" class="campo_requerido  form-control-feedback">*</span>
+
+                            <?
+
                               $data = array(
                                       'type'  => 'text',
-                                      'name'  => 'trabajo',
-                                      'id'    => 'trabajo',
-                                      'value'    => $informacion_trabajo->nombre,
-                                      'class' => 'form-conttrabajo'
+                                      'name'  => 'id_trabajo_tango',
+                                      'id'    => 'id_trabajo_tango',
+                                      'value' => $informacion_trabajo->id_trabajo_tango,
+                                      'class' => 'form-control'
                               );
 
                               echo form_input($data);
-
-                            ?>
-
+                             ?>
                         </div>
                     </div>
 
                      <div class="form-group has-feedback">
-                        <label for="modulo"  class="col-sm-12 conttrabajo-label"  style="margin-top:15px"></label>
-                        <div class="col-sm-12">
+                        <label for="id_area"  class="col-sm-3 control-label">Area</label>
+                        <div class="col-sm-9">
+                            <span style="right: -10px;" class="campo_requerido  form-control-feedback">*</span>
  
-                              <label class=" conttrabajo-label">Modulos Permitidos para el trabajo</label>
-                              
-                              <ul class="list-group">
-                              
-                              <?  for ($i=0; $i < count($modulos); $i++): ?>
+                            <?  $area = array(); ?>
 
-                                    <?  $exito = 0; ?>
+                            <?  $area[''] = 'Seleccionar Area'; ?>
+                            
+                            <?  foreach ($areas->result() as $row):  
 
-                                    <li class="list-group-item">
+                                    $area[$row->id_area] = $row->nombre;
 
-                                        <?
-                                            $data = array(  
-                                                        'name'        => 'id_modulo[]',
-                                                        'id'          => 'modulo_'.$modulos[$i]['modulo']->id_modulo,
-                                                        'value'       => $modulos[$i]['modulo']->id_modulo,
-                                                        'checked'     => FALSE,
-                                                        'style'       => 'form-conttrabajo',
-                                                        'class'       => 'modulos_check'
-                                                        );
+                                endforeach; 
 
-                                            foreach ($modulos_trabajo->result() as $row2):  
+                              echo form_dropdown('id_area', $area , $informacion_trabajo->id_area ,'class="form-control" id="id_area" name="id_area" ' ); 
 
-                                                if($modulos[$i]['modulo']->id_modulo == $row2->id_modulo):   
-
-                                                    $exito = 1;
-
-                                                endif;   
-
-                                            endforeach;  
-
-                                            if( $exito == 1):
-
-                                                $data['checked'] = TRUE;
-
-                                            endif;
-
-                                            echo form_checkbox($data);
-
-                                        ?>
-
-                                        <?=$modulos[$i]['modulo']->nombre?> 
-
-                                        <?  if($modulos[$i]['submodulo']->num_rows() > 0): ?>
-
-                                              <ul class="list-group" style="padding-top: 10px; " id="<?=$modulos[$i]['modulo']->id_modulo?>">
-                                              
-                                              <?  foreach ($modulos[$i]['submodulo']->result() as $submodulo): ?>
-
-                                                    <?  $exito = 0; ?>
-                                                    
-                                                    <li class="list-group-item">
-                                                    <?  /*
-                                                        $data = array(  
-                                                                    'name'        => 'id_modulo[]',
-                                                                    'id'          => 'id_modulo',
-                                                                    'value'       =>  $submodulo->id_modulo,
-                                                                    'checked'     => FALSE,
-                                                                    'style'       => 'form-conttrabajo',
-                                                                   'class'       => 'modulos_check'
-                                                                    );*/
-
-                                                         $data = array(  
-                                                                    'name'        => 'id_modulo[]',
-                                                                    'id'          => 'submodulo',
-                                                                    'value'       =>  $submodulo->id_modulo,
-                                                                    'title'       =>  $modulos[$i]['modulo']->id_modulo,
-                                                                    'checked'     => FALSE,
-                                                                    'style'       => 'form-conttrabajo',
-                                                                   'class'       => 'submodulos submodulos_check_'.$modulos[$i]['modulo']->id_modulo 
-                                                                    );
-
-                                                        foreach ($modulos_trabajo->result() as $row2):  
-
-                                                            if($row2->id_modulo == $submodulo->id_modulo):   
-
-                                                                $exito = 1;
-
-                                                            endif;   
-
-                                                        endforeach;  
-
-                                                        if( $exito == 1):
-
-                                                            $data['checked'] = TRUE;
-
-                                                        endif;
+                            ?>
+                        </div>
+                        <? echo mostrar_error_formulario($error, 'id_area');?> 
+                    </div>
 
 
-                                                        echo form_checkbox($data);  
-                                                    ?>
+                    <div class="form-group has-feedback">
+                        <label for="trabajo"  class="col-sm-3 control-label">Descripción</label>
+                        <div class="col-sm-9">
+                            <span style="right: -10px;" class="campo_requerido  form-control-feedback">*</span>
 
-                                                    <?=$submodulo->nombre?> 
-                                                    
-                                                    </li>
+                            <?
 
-                                                    
-                                              <?  endforeach; ?>
+                              $data = array( 
+                                      'rows'  => 2,
+                                      'name'  => 'descripcion',
+                                      'id'    => 'descripcion',
+                                      'value' => $informacion_trabajo->descripcion,
+                                      'class' => 'form-control'
+                              );
 
-                                              </ul>
-                                              
-                                        <?  endif; ?>
-
-                                    </li>
-
-                              <?  endfor; ?>
-
-                              </ul>
-                              <?/* 
-                              <table class="table" >
-                                <thead>
-
-                                  <tr style="background-color: rgba(60, 141, 188, 0.35);">
-                                      <th>Modulos Permitidos para el trabajo</th>
-                                      <th> </th>                                    
-                                  </tr>
-                                </thead>  
-                                
-
-                                <?/* if($modulos->num_rows() > 0) : ?>
-                                    
-                                    <tbody>
-
-                                    <? foreach ($modulos->result() as $row): ?>
-
-                                        <tr>
-                                          <td> <?=$row->nombre?> </td> 
-                                          <td> 
-
-                                            <?
-                                                $exito = 0;
-                                                
-                                                $data = array(  
-                                                        'name'        => 'id_modulo[]',
-                                                        'id'          => 'id_modulo',
-                                                        'value'       => $row->id_modulo,
-                                                        'checked'     => FALSE,
-                                                        'style'       => 'form-conttrabajo' 
-                                                        );
-
-                                                foreach ($modulos_trabajo->result() as $row2):  
-
-                                                    if($row->id_modulo == $row2->id_modulo):   
-
-                                                        $exito = 1;
-
-                                                    endif;   
-
-                                                endforeach;  
-
-                                                if( $exito == 1):
-
-                                                    $data['checked'] = TRUE;
-
-                                                endif;
-
-
-                                                echo form_checkbox($data);
-                                            ?>
-                                               
-                                          </td>
-                                         
-                                        </tr>
-
-                                    <? endforeach; ?>
-                                
-                                <? endif; 
-
-                                </tbody>
-
-                              </table>*/?>
-
-
+                              echo form_textarea($data);
+                             ?>
                         </div>
                     </div>
-                    
+
+
+ 
 
                    <div class="col-xs-12" style="margin-top:20px; margin-bottom:20px" >
-                      <button type="submit" class="btn btn-primary btn-block"> Modificar <div id="div_loadding_modificar_trabajo" class="form-conttrabajo-feedback"  style='margin-right:25px'><img src="<?=base_url()?>assets/images/loading_blanco.gif" ></div>  </button>   
+                      <button type="submit" class="btn btn-primary btn-block"> Modificar <div id="div_loadding_modificar_trabajo" class="form-control-feedback"  style='margin-right:25px'><img src="<?=base_url()?>assets/images/loading_blanco.gif" ></div>  </button>   
                     </div>  
  
 
@@ -263,7 +141,149 @@
 
                 </div>
             </div>
-      	</div>
+      	    
+            <!-- crear  -->
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title"> Crear trabajo</h3>
+                    <div class="box-tools pull-right">
+                      <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                      <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                    </div>
+                </div> 
+                <div class="box-body"> 
+
+                  <? 
+                    $attributes = array('class' => 'form', 'id' => 'form_alta_necesidad', 'name' => 'form_alta_necesidad');
+                    echo form_open('necesidad/alta_necesidad', $attributes); ?>
+
+                    <div class="form-group has-feedback">
+                        <label for="area"  class="col-sm-3 control-label">Area</label>
+                        <div class="col-sm-9">
+                            <span style="right: -10px;" class="campo_requerido  form-control-feedback">*</span>
+ 
+                            <?  $area = array(); ?>
+
+                            <?  $area[''] = 'Seleccionar area'; ?>
+                            
+                            <?  foreach ($areas->result() as $row):  
+
+                                    $area[$row->id_area] = $row->id_area."-".$row->nombre;
+
+                                endforeach; 
+
+                              echo form_dropdown('id_area', $area, $row->id_area ,'class="form-control" id="id_area" name="id_area"  disabled="disabled" '); 
+
+                            ?>
+                        </div>
+                        <? echo mostrar_error_formulario($error, 'id_area');?>
+                    </div>
+
+                    <div class="form-group has-feedback">
+                        <label for="fecha_limite"  class="col-sm-3 control-label">Fecha </label>
+                        <div class="col-sm-9">
+                            <span style="right: -10px;" class="campo_requerido  form-control-feedback">*</span>
+ 
+                            <? 
+                              $data = array(
+                                      'type'  => 'date',
+                                      'name'  => 'fecha_limite',
+                                      'id'    => 'fecha_limite', 
+                                      'class' => 'form-control'
+                              );
+
+                              echo form_input($data);
+
+                            ?>
+                        </div>
+                        <? echo mostrar_error_formulario($error, 'fecha_limite');?>
+                    </div>
+
+ 
+                    <div class="form-group has-feedback" style="margin-top: 10px">
+                        <label for="necesidad"  class="col-sm-3 class-label">Descripción</label>
+                        <div class="col-sm-9"> 
+
+                             <? 
+                           $data = array(
+                                      'name'        => 'descripcion',
+                                      'id'          => 'descripcion', 
+                                      'rows'        => '5', 
+                                      'class'       => 'form-control'
+                                  );
+
+                                  echo form_textarea($data);
+
+                            ?>
+
+                        </div>
+                    </div>
+
+              
+
+                   <div class="col-xs-12" style="margin-top:20px; margin-bottom:20px" >
+                      <button type="submit" class="btn btn-primary btn-block"> Crear <div id="div_loadding_crear_necesidad" class="form-class-feedback"  style='margin-right:25px'><img src="<?=base_url()?>assets/images/loading_blanco.gif" ></div>  </button>   
+                    </div>  
+ 
+
+                    <? echo form_close(); ?>
+                     
+                </div>
+            </div> 
+        </div>
+
+        <!-- Necesidades del trabajo -->
+        <div class="col-md-7">
+           
+           <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title"> Necesidades del trabajo</h3>
+                    <div class="box-tools pull-right">
+                      <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                      <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                    </div>
+                </div> 
+                <div class="box-body"> 
+
+                    <table class="table" id="tabla_necesidades" name="tabla_necesidades">
+                        <thead>
+
+                          <tr style="background-color: rgba(60, 141, 188, 0.35);">
+                              <th>Id</th>
+                              <th>Trabajo</th>   
+                              <th>Comentario </th>  
+                              <th>Fecha Limite </th>
+                              <th> </th> 
+                              <th> </th>                                    
+                          </tr>
+                        </thead>  
+                        <tbody>
+
+                        <? foreach ($necesidades_trabajo->result() as $row): ?>
+
+                            <tr>
+                              <td> <?=$row->id_necesidad?> </td>
+                              <td> <?=$row->descripcion_trabajo?> </td> 
+                              <td> <?=$row->comentario?> </td>
+                              <td> <?=$row->fecha_limite?> </td>  
+                              <td> 
+                                  <a href="<?=base_url()?>index.php/necesidad/necesidad/<?=$row->id_necesidad?>"><i class="fa fa-2x fa-binoculars" aria-hidden="true"></i></a>
+                              </td>
+                              <td>
+                                  <a href="#" onclick="eliminar_necesidad(<?=$row->id_necesidad?>)"><i class="fa fa-2x fa-times" aria-hidden="true" style="padding-left:5px"></i> </a>
+                              </td> 
+                            </tr>
+
+                        <? endforeach; ?>
+
+                        </tbody>
+
+                    </table>
+                  
+                </div>
+            </div> 
+        
+        </div>
 
     </div>
 </div>
@@ -299,3 +319,4 @@ var jq_va = jQuery.noConflict();
 
 
 <script language="javascript" type="text/javascript" src="<?=base_url()?>assets/js/trabajo.js" ></script>
+<script language="javascript" type="text/javascript" src="<?=base_url()?>assets/js/necesidad.js" ></script>
