@@ -20,7 +20,7 @@
 
          ?>
         
-        <!-- Crear usuario -->
+        <!-- Crear recurso -->
         <div class="col-md-5">
             <div class="box box-primary">
                 <div class="box-header with-border">
@@ -90,7 +90,7 @@
             </div>
         </div>
         
-        <!-- Ver usuarios -->
+        <!-- Ver Recursos -->
         <div class="col-md-7">
 
             <div class="box box-primary">
@@ -127,10 +127,10 @@
                                 <td> <?php echo $row->descripcion; ?> </td> 
                                 <td> <?php echo $row->unidad_medida; ?> </td> 
                                 <td> 
-                                    <a href="<?=base_url()?>index.php/recurso/recurso/<?=$row->id_recurso?>"><i class="fa fa-2x fa-binoculars" aria-hidden="true"></i></a>
+                                    <a href="<?=base_url()?>index.php/recurso/recurso/<?=$row->id_recurso?>"><i class="fa fa-1x fa-binoculars" aria-hidden="true"></i></a>
                                 </td>
                                 <td>
-                                    <a href="#" onclick="eliminar_recurso(<?=$row->id_recurso?>)"><i class="fa fa-2x fa-times" aria-hidden="true" style="padding-left:5px"></i> </a>
+                                    <a href="#" onclick="eliminar_recurso(<?=$row->id_recurso?>)"><i class="fa fa-1x fa-times" aria-hidden="true" style="padding-left:5px"></i> </a>
                                 </td> 
                               </tr>
 

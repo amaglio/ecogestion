@@ -22,6 +22,22 @@ public function traer_recursos()
 
 }
 
+public function traer_recursos_necesidad($id_necesidad)
+{
+    
+    $sql =  "   SELECT *
+                FROM necesidad_item ni, recurso r
+                WHERE ni.id_recurso = r.id_recurso
+                AND ni.id_necesidad = $id_necesidad "  ;
+    
+    $query = $this->db->query( $sql );
+ 
+
+    return $query;  
+
+}
+
+
 public function traer_informacion_recurso($id_recurso)
 {
      $sql =  "  SELECT *

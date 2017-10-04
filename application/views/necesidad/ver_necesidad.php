@@ -26,187 +26,245 @@
           </button>
         </div>
         
-        <!-- Ver Necesidad -->
+        <!-- Ver Necesidad y cargar recurso -->
         <div class="col-md-5">
-            <div class="box box-primary">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Modificar necesidad</h3>
-                    <div class="box-tools pull-right">
-                      <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                      <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                    </div>
-                </div> 
-                <div class="box-body">
 
-                    <? mensaje_resultado($mensaje); ?>
-                
-                    <? 
-                    $attributes = array('class' => 'form', 'id' => 'form_modifica_necesidad', 'name' => 'form_modifica_necesidad');
-                    echo form_open('necesidad/modifica_necesidad', $attributes); ?>
+          <!-- Ver Necesidad -->
+          <div class="box box-primary">
+              <div class="box-header with-border">
+                  <h3 class="box-title">Modificar necesidad</h3>
+                  <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                  </div>
+              </div> 
+              <div class="box-body">
 
-                        <? 
-                              $data = array(
-                                      'type'  => 'hidden',
-                                      'name'  => 'id_necesidad',
-                                      'value'  => $necesidad->id_necesidad,
-                                      'id'    => 'id_necesidad', 
-                                      'class' => 'form-control'
-                              );
+                  <? mensaje_resultado($mensaje); ?>
+              
+                  <? 
+                  $attributes = array('class' => 'form', 'id' => 'form_modifica_necesidad', 'name' => 'form_modifica_necesidad');
+                  echo form_open('necesidad/modifica_necesidad', $attributes); ?>
 
-                              echo form_input($data);
+                      <? 
+                            $data = array(
+                                    'type'  => 'hidden',
+                                    'name'  => 'id_necesidad',
+                                    'value'  => $necesidad->id_necesidad,
+                                    'id'    => 'id_necesidad', 
+                                    'class' => 'form-control'
+                            );
 
-                        ?>
+                            echo form_input($data);
 
-                     <div class="form-group has-feedback">
-                        <label for="Trabajo"  class="col-sm-3 control-label">Trabajo</label>
-                        <div class="col-sm-9">
-                            <span style="right: -10px;" class="campo_requerido  form-control-feedback">*</span>
- 
-                            <?  $trabajo = array(); ?>
+                      ?>
 
-                            <?  $trabajo[''] = 'Seleccionar trabajo'; ?>
-                            
-                            <?  foreach ($trabajos->result() as $row):  
+                   <div class="form-group has-feedback">
+                      <label for="Trabajo"  class="col-sm-3 control-label">Trabajo</label>
+                      <div class="col-sm-9">
+                          <span style="right: -10px;" class="campo_requerido  form-control-feedback">*</span>
 
-                                    $trabajo[$row->id_trabajo] = $row->id_trabajo."-".$row->descripcion;
+                          <?  $trabajo = array(); ?>
 
-                                endforeach; 
+                          <?  $trabajo[''] = 'Seleccionar trabajo'; ?>
+                          
+                          <?  foreach ($trabajos->result() as $row):  
 
-                              echo form_dropdown('id_trabajo', $trabajo, $necesidad->id_trabajo ,'class="form-control" id="id_trabajo" name="id_trabajo" ' ); 
+                                  $trabajo[$row->id_trabajo] = $row->id_trabajo."-".$row->descripcion;
 
-                            ?>
-                        </div>
-                        <? echo mostrar_error_formulario($error, 'id_trabajo');?>
-                    </div>
+                              endforeach; 
 
-                     <div class="form-group has-feedback">
-                        <label for="fecha_limite"  class="col-sm-3 control-label">Fecha </label>
-                        <div class="col-sm-9">
-                            <span style="right: -10px;" class="campo_requerido  form-control-feedback">*</span>
- 
-                            <? 
-                              $data = array(
-                                      'type'  => 'date',
-                                      'name'  => 'fecha_limite',
-                                      'id'    => 'fecha_limite', 
-                                      'class' => 'form-control',
-                                      'value' => date('d-m-Y',strtotime($necesidad->fecha_limite))
-                              );
+                            echo form_dropdown('id_trabajo', $trabajo, $necesidad->id_trabajo ,'class="form-control" id="id_trabajo" name="id_trabajo" ' ); 
 
-                              echo form_input($data);
+                          ?>
+                      </div>
+                      <? echo mostrar_error_formulario($error, 'id_trabajo');?>
+                  </div>
 
-                            ?>
-                        </div>
-                        <? echo mostrar_error_formulario($error, 'fecha_limite');?>
-                    </div>
+                   <div class="form-group has-feedback">
+                      <label for="fecha_limite"  class="col-sm-3 control-label">Fecha </label>
+                      <div class="col-sm-9">
+                          <span style="right: -10px;" class="campo_requerido  form-control-feedback">*</span>
 
-                    <div class="form-group has-feedback" style="margin-top: 10px">
-                        <label for="necesidad"  class="col-sm-3 class-label">Descripción</label>
-                        <div class="col-sm-9"> 
+                          <? 
+                            $data = array(
+                                    'type'  => 'date',
+                                    'name'  => 'fecha_limite',
+                                    'id'    => 'fecha_limite', 
+                                    'class' => 'form-control',
+                                    'value' => date('d-m-Y',strtotime($necesidad->fecha_limite))
+                            );
 
-                             <? 
-                           $data = array(
-                                      'name'        => 'descripcion',
-                                      'id'          => 'descripcion', 
-                                      'rows'        => '5', 
-                                      'class'       => 'form-control',
-                                      'value' => $necesidad->comentario
-                                  );
+                            echo form_input($data);
 
-                                  echo form_textarea($data);
+                          ?>
+                      </div>
+                      <? echo mostrar_error_formulario($error, 'fecha_limite');?>
+                  </div>
 
-                            ?>
+                  <div class="form-group has-feedback" style="margin-top: 10px">
+                      <label for="necesidad"  class="col-sm-3 class-label">Descripción</label>
+                      <div class="col-sm-9"> 
 
-                        </div>
-                    </div>
-                    
+                           <? 
+                         $data = array(
+                                    'name'        => 'descripcion',
+                                    'id'          => 'descripcion', 
+                                    'rows'        => '5', 
+                                    'class'       => 'form-control',
+                                    'value' => $necesidad->comentario
+                                );
+
+                                echo form_textarea($data);
+
+                          ?>
+
+                      </div>
+                  </div>
+                  
 
 
 
-                    <div class="col-xs-12" style="margin-top:20px; margin-bottom:20px" >
-                      <button type="submit" class="btn btn-primary btn-block"> Modificar <div id="div_loadding_modifica_necesidad" class="form-control-feedback"  style='margin-right:25px'><img src="<?=base_url()?>assets/images/loading_blanco.gif" ></div>  </button>   
-                    </div>
+                  <div class="col-xs-12" style="margin-top:20px; margin-bottom:20px" >
+                    <button type="submit" class="btn btn-primary btn-block"> Modificar <div id="div_loadding_modifica_necesidad" class="form-control-feedback"  style='margin-right:25px'><img src="<?=base_url()?>assets/images/loading_blanco.gif" ></div>  </button>   
+                  </div>
 
-                    <? echo form_close(); ?>
+                  <? echo form_close(); ?>
 
-                
-                     
+              
+                   
+              </div>
+          </div>
+
+          <!-- cargar recurso a la necesidad -->
+          <div class="box box-primary">
+              <div class="box-header with-border">
+                  <h3 class="box-title">Asociar recurso a la necesidad</h3>
+                  <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                  </div>
+              </div> 
+              <div class="box-body"> 
+
+                <div class="row">
+
+                 <? 
+                  $attributes = array('class' => 'form', 'id' => 'form_asociar_recurso', 'name' => 'form_asociar_recurso');
+                  echo form_open('necesidad/asociar_recurso', $attributes); ?>
+
+
+                  <div class="form-group has-feedback">
+                      <label for="recurso"  class="col-sm-3 control-label">Recurso </label>
+                      <div class="col-sm-9">
+                          <span style="right: -10px;" class="campo_requerido  form-control-feedback">*</span>
+
+                          <? 
+                            $data = array(
+                                    'type'  => 'text',
+                                    'name'  => 'recurso',
+                                    'id'    => 'recurso', 
+                                    'class' => 'form-control'
+                            );
+
+                            echo form_input($data);
+
+                          ?>
+                      </div>
+                      <? echo mostrar_error_formulario($error, 'recurso');?>
+                  </div>
+
+
+                  <div class="form-group has-feedback">
+                      <label for="cantidad"  class="col-sm-3 control-label">cantidad </label>
+                      <div class="col-sm-9">
+                          <span style="right: -10px;" class="campo_requerido  form-control-feedback">*</span>
+
+                          <? 
+                            $data = array(
+                                    'type'  => 'text',
+                                    'name'  => 'cantidad',
+                                    'id'    => 'cantidad', 
+                                    'class' => 'form-control'
+                            );
+
+                            echo form_input($data);
+
+                          ?>
+                      </div>
+                      <? echo mostrar_error_formulario($error, 'cantidad');?>
+                  </div>
+
+            
+
+                 <div class="col-xs-12" style="margin-top:20px; margin-bottom:20px" >
+                    <button type="submit" class="btn btn-primary btn-block"> Asociar <div id="div_loadding_asociar_recurso" class="form-class-feedback"  style='margin-right:25px'><img src="<?=base_url()?>assets/images/loading_blanco.gif" ></div>  </button>   
+                  </div>  
+
+
+                  <? echo form_close(); ?>
+
                 </div>
-            </div>
+                   
+              </div>
+          </div>
+
         </div>
 
         <div class="col-md-7">
-            <div class="box box-primary">
+            
+          <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Recursos de la necesidad</h3>
+                    <h3 class="box-title">Recursos</h3>
                     <div class="box-tools pull-right">
                       <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                       <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                     </div>
                 </div> 
-                <div class="box-body"> 
+                <div class="box-body">  
 
-                  <div class="row">
+                    <table class="table" id="tabla_recursos" name="tabla_recursos">
+                          <thead>
 
-                   <? 
-                    $attributes = array('class' => 'form', 'id' => 'form_asociar_recurso', 'name' => 'form_asociar_recurso');
-                    echo form_open('necesidad/asociar_recurso', $attributes); ?>
- 
+                            <tr style="background-color: rgba(60, 141, 188, 0.35);">
+                                <th>ID</th>
+                                <th>Recurso</th>
+                                <th>Unidad Medida</th>
+                                <th>Cantidad necesaria</th> 
+                                <th></th>  
+                                <th></th>                                
+                            </tr>
+                          </thead>  
+                          <tbody>
 
-                    <div class="form-group has-feedback">
-                        <label for="recurso"  class="col-sm-3 control-label">Recurso </label>
-                        <div class="col-sm-9">
-                            <span style="right: -10px;" class="campo_requerido  form-control-feedback">*</span>
- 
                             <? 
-                              $data = array(
-                                      'type'  => 'text',
-                                      'name'  => 'recurso',
-                                      'id'    => 'recurso', 
-                                      'class' => 'form-control'
-                              );
+                      
+                            foreach ($recursos_necesidad->result() as $row): 
 
-                              echo form_input($data);
+                             ?>
 
-                            ?>
-                        </div>
-                        <? echo mostrar_error_formulario($error, 'recurso');?>
-                    </div>
+                              <tr>
+                                <td> <?php echo $row->id_recurso; ?> </td>
+                                <td> <?php echo $row->descripcion; ?> </td> 
+                                <td> <?php echo $row->unidad_medida; ?> </td> 
+                                <td> <?php echo $row->cantidad_necesaria; ?> </td> 
+                                <td> 
+                                    <a href="<?=base_url()?>index.php/recurso/recurso/<?=$row->id_recurso?>"><i class="fa fa-1x fa-binoculars" aria-hidden="true"></i></a>
+                                </td>
+                                <td>
+                                    <a href="#" onclick="eliminar_recurso(<?=$row->id_recurso?>)"><i class="fa fa-1x fa-times" aria-hidden="true" style="padding-left:5px"></i> </a>
+                                </td> 
+                              </tr>
 
+                            <? endforeach; ?>
  
-                    <div class="form-group has-feedback">
-                        <label for="cantidad"  class="col-sm-3 control-label">cantidad </label>
-                        <div class="col-sm-9">
-                            <span style="right: -10px;" class="campo_requerido  form-control-feedback">*</span>
- 
-                            <? 
-                              $data = array(
-                                      'type'  => 'text',
-                                      'name'  => 'cantidad',
-                                      'id'    => 'cantidad', 
-                                      'class' => 'form-control'
-                              );
+                          </tbody>
 
-                              echo form_input($data);
+                      </table>
 
-                            ?>
-                        </div>
-                        <? echo mostrar_error_formulario($error, 'cantidad');?>
-                    </div>
-
-              
-
-                   <div class="col-xs-12" style="margin-top:20px; margin-bottom:20px" >
-                      <button type="submit" class="btn btn-primary btn-block"> Asociar <div id="div_loadding_asociar_recurso" class="form-class-feedback"  style='margin-right:25px'><img src="<?=base_url()?>assets/images/loading_blanco.gif" ></div>  </button>   
-                    </div>  
- 
-
-                    <? echo form_close(); ?>
-
-                  </div>
-                     
                 </div>
             </div>
+
         </div>
         
     </div>

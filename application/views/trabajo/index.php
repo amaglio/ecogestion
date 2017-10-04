@@ -143,10 +143,10 @@
                               <td> <?=$row->descripcion?> </td> 
                               <td> <?=$row->nombre_area?> </td>
                               <td> 
-                                  <a href="<?=base_url()?>index.php/trabajo/trabajo/<?=$row->id_trabajo?>"><i class="fa fa-2x fa-binoculars" aria-hidden="true"></i></a>
+                                  <a href="<?=base_url()?>index.php/trabajo/trabajo/<?=$row->id_trabajo?>"><i class="fa fa-1x fa-binoculars" aria-hidden="true"></i></a>
                               </td>
                               <td>
-                                  <a href="#" onclick="eliminar_trabajo(<?=$row->id_trabajo?>)"><i class="fa fa-2x fa-times" aria-hidden="true" style="padding-left:5px"></i> </a>
+                                  <a href="#" onclick="eliminar_trabajo(<?=$row->id_trabajo?>)"><i class="fa fa-1x fa-times" aria-hidden="true" style="padding-left:5px"></i> </a>
                               </td> 
                             </tr>
 

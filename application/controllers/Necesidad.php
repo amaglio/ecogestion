@@ -8,6 +8,7 @@ public function __construct()
 	parent::__construct();
 	$this->load->model('Necesidad_model');
 	$this->load->model('Trabajo_model');
+	$this->load->model('Recurso_model');
 }
 
 public function index()
@@ -48,6 +49,8 @@ public function necesidad($id_necesidad=NULL) // Ver necesidad
 		$datos['error'] = $this->session->flashdata('error');
 		$datos['trabajos'] =  $this->Trabajo_model->traer_trabajos();
 		$datos['necesidad'] = $this->Necesidad_model->traer_informacion_necesidad($id_necesidad);
+
+		$datos['recursos_necesidad'] = $this->Recurso_model->traer_recursos_necesidad($id_necesidad);
 
 
 		$this->load->view('estructura/head');	
