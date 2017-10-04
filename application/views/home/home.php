@@ -13,7 +13,7 @@
 
             <div class="info-box-content">
               <span class="info-box-text">Trabajos activos</span>
-              <span class="info-box-number">10</span>
+              <span class="info-box-number"><?php echo $trabajos->num_rows(); ?></span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -26,7 +26,7 @@
 
             <div class="info-box-content">
               <span class="info-box-text">Necesidades activas</span>
-              <span class="info-box-number">111</span>
+              <span class="info-box-number"><?php echo $necesidades->num_rows(); ?></span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -54,37 +54,28 @@
                           <thead>
 
                             <tr style="background-color: rgba(60, 141, 188, 0.35);">
-                                <th>Trabajo</th>
-                                <th>Estado</th>
+                                <th>ID</th>
+                                <th>Area</th>
+                                <th>Descripcion</th>
                                 <th>Ver</th>                                    
                             </tr>
                           </thead>  
                           <tbody>
- 
+                            
+                            <?php foreach ($trabajos->result() as $row): ?>
 
-                            <tr>
-                              <td> 17845 </td>
-                              <td> Nuevo </td>
-                              <td> 
-                                  <a href=""><i class="fa fa-1x fa-binoculars" aria-hidden="true"></i></a>
-                              </td>
-                            </tr>
+                                  <tr>
+                                    <td><?php echo $row->id_trabajo; ?> </td>
+                                    <td><?php echo $row->nombre_area; ?> </td>
+                                    <td><?php echo $row->descripcion; ?> </td>
+                                    <td> 
+                                        <a href="<?=base_url()?>index.php/trabajo/trabajo/<?=$row->id_trabajo?>"><i class="fa fa-1x fa-binoculars" aria-hidden="true"></i></a>
+                                    </td>
+                                  </tr>
 
-                            <tr>
-                              <td> 1111 </td>
-                              <td> Finalizado </td>
-                              <td> 
-                                  <a href=""><i class="fa fa-1x fa-binoculars" aria-hidden="true"></i></a>
-                              </td>
-                            </tr>
+                            <?php endforeach; ?>
 
-                            <tr>
-                              <td> 17845 </td>
-                              <td> Pendiente </td>
-                              <td> 
-                                  <a href=""><i class="fa fa-1x fa-binoculars" aria-hidden="true"></i></a>
-                              </td>
-                            </tr>
+
  
 
                           </tbody>
@@ -109,39 +100,36 @@
                 <div class="box-body">
 
 
-                    <table class="table" id="universidades_convenios" name="universidades_convenios">
+                     <table class="table" id="universidades_convenios" name="universidades_convenios">
                           <thead>
 
                             <tr style="background-color: rgba(221, 75, 57, 0.66);">
-                                <th>Necesidad</th>
-                                <th>Trabajo</th>
-                                <th>Usuario</th>
-                                <th>Fecha</th>
+                                <th>ID</th>
+                                <th>ID trabajo</th>
+                                <th>Fecha limite</th>
+                                <th>Comentario</th>
                                 <th>Ver</th>                                    
                             </tr>
                           </thead>  
                           <tbody>
- 
+                            
+                            <?php foreach ($necesidades->result() as $row): ?>
 
-                            <tr>
-                              <td> 12 </td>
-                              <td> 17845 </td>
-                              <td> Mariano </td>
-                              <td> 12/21/2015 </td>
-                              <td> 
-                                  <a href=""><i class="fa fa-1x fa-binoculars" aria-hidden="true"></i></a>
-                              </td>
-                            </tr>
+                                  <tr>
+                                    <td><?php echo $row->id_necesidad; ?> </td>
+                                    <td><?php echo $row->descripcion_trabajo; ?> </td>
+                                    <td><?php echo $row->fecha_limite; ?> </td>
+                                    <td><?php echo $row->comentario; ?> </td>
+                                    <td> 
+                                        <a href="<?=base_url()?>index.php/necesidad/necesidad/<?=$row->id_necesidad?>">
+                                          <i style="color:rgba(221, 75, 57, 0.66);" class="fa fa-1x fa-binoculars" aria-hidden="true"></i>
+                                        </a>
+                                    </td>
+                                  </tr>
 
-                            <tr>
-                              <td> 13 </td>
-                              <td> 17845 </td>
-                              <td> ammagliola </td>
-                              <td> 12/21/2012 </td>
-                              <td> 
-                                  <a href=""><i class="fa fa-1x fa-binoculars" aria-hidden="true"></i></a>
-                              </td>
-                            </tr>
+                            <?php endforeach; ?>
+
+
  
 
                           </tbody>

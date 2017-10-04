@@ -5,15 +5,23 @@ class Home extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		//$this->db = $this->load->database($this->session->userdata('DB'),TRUE, TRUE);		
-		 $this->load->helper('general_helper');
+		 
+		$this->load->helper('general_helper');
+		$this->load->model('Necesidad_model');
+		$this->load->model('Trabajo_model');
+
 	}
 
 	public function index()
 	{	
-		//armar_menu();
+		$datos['mensaje'] = $this->session->flashdata('mensaje');
+		$datos['error'] = $this->session->flashdata('error');
+
+		$datos['trabajos'] =  $this->Trabajo_model->traer_trabajos();
+		$datos['necesidades'] = $this->Necesidad_model->traer_necesidades();
+
  		$this->load->view('estructura/head');	
-		$this->load->view('home/home');
+		$this->load->view('home/home',$datos);
 		$this->load->view('estructura/footer');   
 	}
 
