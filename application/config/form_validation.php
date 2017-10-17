@@ -425,6 +425,47 @@ $config = array(
                                         )
                                 ),
 
+              'alta_necesidad' => array(
+                                     array(
+                                            'field' => 'id_trabajo',
+                                            'label' => 'id_trabajo',
+                                            'rules' => 'required|trim|xss_clean|is_numeric'
+                                        ),
+                                    array(
+                                            'field' => 'fecha_limite',
+                                            'label' => 'fecha_limite',
+                                            'rules' => 'required|trim|xss_clean'
+                                        )
+                                ),
+
+
+              'modifica_necesidad' => array(
+                                         array(
+                                                'field' => 'id_trabajo',
+                                                'label' => 'id_trabajo',
+                                                'rules' => 'required|trim|xss_clean|is_numeric'
+                                            ),
+                                        array(
+                                                'field' => 'fecha_limite',
+                                                'label' => 'fecha_limite',
+                                                'rules' => 'required|trim|xss_clean'
+                                            ),
+                                        array(
+                                                'field' => 'id_necesidad',
+                                                'label' => 'id_necesidad',
+                                                'rules' => 'required|trim|xss_clean|is_numeric'
+                                            )
+                                ),
+                
+
+              'baja_necesidad' => array(
+                                     array(
+                                            'field' => 'id_necesidad',
+                                            'label' => 'id_necesidad',
+                                            'rules' => 'required|trim|xss_clean|is_numeric'
+                                        ) 
+                                ),
+
 // --------------------------------- TRABAJO ------------------------------
              'ver_trabajo' => array(
                                      array(

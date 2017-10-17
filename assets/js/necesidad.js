@@ -9,7 +9,7 @@ jq_va(function(){
                 id_trabajo : {
                     required : true
                 },
-                descripcion : {
+                fecha_limite : {
                     required : true
                 } 
         },
@@ -17,8 +17,8 @@ jq_va(function(){
                 id_trabajo : {
                      required : "Debe seleccionar el trabajo"
                 },
-                descripcion : {
-                     required : "Debe ingresar el nombre del necesidad"
+                fecha_limite : {
+                     required : "Debe ingresar la fecha limite de la necesidad"
                 } 
         },
         submitHandler: function(form) {
@@ -121,3 +121,11 @@ function eliminar_necesidad(id_necesidad)
      
   }
 }
+
+
+/*------- FECHA DE LA NECESIDAD -----*/
+
+jq_dt('.calendario').datepicker({
+    autoclose: true,
+    format: 'dd/mm/yyyy'
+  });

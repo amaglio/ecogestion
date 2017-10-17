@@ -80,7 +80,7 @@ public function alta_necesidad()
  
 		if ( $query['codigo_error'] == 0 ): // OK
 		 	
-		 	$mensaje['mensaje'] = 'Necesidad creado exitosamente';
+		 	$mensaje['mensaje'] = 'Necesidad creada exitosamente';
 			$mensaje['clase_mensaje'] = 'success'; 
 					 				 
 		else:  
@@ -110,10 +110,6 @@ public function alta_necesidad()
 		 		 	$mensaje['mensaje'] = 'Error: ha ocurrido un error interno, intente nuevamente';
 		 			break;
 
-		 		case 1: // El id_necesidad ya existe
-
-		 		 	$mensaje['mensaje'] = 'Error: ha ocurrido un error interno, intente nuevamente';
-		 			break;
 		 	}
 
 		
@@ -144,7 +140,7 @@ public function modifica_necesidad()
  
 		if ( $query['codigo_error'] == 0 ): // OK
 		 	
-		 	$mensaje['mensaje'] = 'necesidad modificada exitosamente';
+		 	$mensaje['mensaje'] = 'Necesidad modificada exitosamente';
 			$mensaje['clase_mensaje'] = 'success';
 			$this->session->set_flashdata('mensaje',$mensaje );
 					 				 
@@ -183,11 +179,13 @@ public function modifica_necesidad()
 
 			$this->session->set_flashdata('mensaje', $mensaje );
 
+			
 		
 		endif;   
 	endif; 
 
-	redirect("necesidad/index");
+	redirect("necesidad/necesidad/".$this->input->post('id_necesidad'));
+	///redirect("necesidad/index");
 }
 
 public function baja_necesidad()
@@ -210,7 +208,7 @@ public function baja_necesidad()
   
 		if ( $query['codigo_error'] == 0 ): // OK
 		 
-			$mensaje['mensaje'] = 'necesidad eliminada exitosamente';
+			$mensaje['mensaje'] = 'Necesidad eliminada exitosamente';
 			$mensaje['clase_mensaje'] = 'success';
 			$return["error"] = FALSE;
 					 				 

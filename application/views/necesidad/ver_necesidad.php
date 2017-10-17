@@ -88,11 +88,11 @@
 
                           <? 
                             $data = array(
-                                    'type'  => 'date',
+                                    'type'  => 'text',
                                     'name'  => 'fecha_limite',
                                     'id'    => 'fecha_limite', 
-                                    'class' => 'form-control',
-                                    'value' => date('d-m-Y',strtotime($necesidad->fecha_limite))
+                                    'class' => 'form-control calendario',
+                                    'value' =>  $necesidad->fecha_limite
                             );
 
                             echo form_input($data);
@@ -176,7 +176,7 @@
 
 
                   <div class="form-group has-feedback">
-                      <label for="cantidad"  class="col-sm-3 control-label">cantidad </label>
+                      <label for="cantidad"  class="col-sm-3 control-label">Cantidad </label>
                       <div class="col-sm-9">
                           <span style="right: -10px;" class="campo_requerido  form-control-feedback">*</span>
 
@@ -215,7 +215,7 @@
             
           <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Recursos</h3>
+                    <h3 class="box-title">Recursos para la necesidad</h3>
                     <div class="box-tools pull-right">
                       <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                       <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -294,6 +294,7 @@ var jq_va = jQuery.noConflict();
      var jq_dt = jQuery.noConflict();
 </script>
  
-
+<!-- Datepicker -->
+<script src="<?=base_url()?>assets/plugins/datepicker/bootstrap-datepicker.js"></script>
 
 <script language="javascript" type="text/javascript" src="<?=base_url()?>assets/js/necesidad.js" ></script>

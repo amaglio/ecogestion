@@ -42,16 +42,27 @@
                             <?  $trabajo = array(); ?>
 
                             <?  $trabajo[''] = 'Seleccionar trabajo'; ?>
+
+                            <?  if( $trabajos->num_rows() > 0 ): ?>
+                              
+                            <?      foreach ($trabajos->result() as $row):  
+
+                                        $trabajo[$row->id_trabajo] = $row->id_trabajo."-".$row->descripcion;
+
+                                    endforeach; 
+
+                                    echo form_dropdown('id_trabajo', $trabajo, '' ,'class="form-control" id="id_trabajo" name="id_trabajo" ' );   ?>
+
+                            <?   else: ?>                          
+
+                                  <div class="alert alert-warning">
+                                    <strong>No hay trabajos!</strong> Primero debe <a href="<?=base_url()?>index.php/trabajo/index" >crear un trabajo</a> para crear necesidades.
+                                  </div>
+
+                            <?   endif; ?>
                             
-                            <?  foreach ($trabajos->result() as $row):  
 
-                                    $trabajo[$row->id_trabajo] = $row->id_trabajo."-".$row->descripcion;
 
-                                endforeach; 
-
-                              echo form_dropdown('id_trabajo', $trabajo, '' ,'class="form-control" id="id_trabajo" name="id_trabajo" ' ); 
-
-                            ?>
                         </div>
                         <? echo mostrar_error_formulario($error, 'id_trabajo');?>
                     </div>
@@ -63,10 +74,10 @@
  
                             <? 
                               $data = array(
-                                      'type'  => 'date',
+                                      'type'  => 'text',
                                       'name'  => 'fecha_limite',
                                       'id'    => 'fecha_limite', 
-                                      'class' => 'form-control'
+                                      'class' => 'form-control calendario'
                               );
 
                               echo form_input($data);
@@ -193,5 +204,8 @@ var jq_va = jQuery.noConflict();
 </script>
  
 
+<!-- Datepicker -->
+<script src="<?=base_url()?>assets/plugins/datepicker/bootstrap-datepicker.js"></script>
+ 
 
 <script language="javascript" type="text/javascript" src="<?=base_url()?>assets/js/necesidad.js" ></script>
