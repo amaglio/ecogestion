@@ -339,16 +339,16 @@ $config = array(
 
             'alta_recurso' => array(
                                      array(
-                                            'field' => 'recurso_area',
-                                            'label' => 'recurso_area',
+                                            'field' => 'nombre_recurso',
+                                            'label' => 'nombre_recurso',
                                             'rules' => 'required|trim|xss_clean'
                                         )
                                 ),
 
             'modifica_recurso' => array(
                                      array(
-                                            'field' => 'recurso_area',
-                                            'label' => 'recurso_area',
+                                            'field' => 'nombre_recurso',
+                                            'label' => 'nombre_recurso',
                                             'rules' => 'required|trim|xss_clean'
                                         ),
                                      array(

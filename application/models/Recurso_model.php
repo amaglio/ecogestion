@@ -13,7 +13,8 @@ public function traer_recursos()
 {
     
     $sql =  "   SELECT *
-                FROM recurso"  ;
+                FROM recurso
+                WHERE fecha_baja IS NULL"  ;
     
     $query = $this->db->query( $sql );
  
@@ -64,17 +65,17 @@ function abm_recurso($accion, $array)
         $nombre_recurso = " NULL " ;
 
      // Para A - M
-    if(isset($array['id_rama']) && !empty($array['id_rama']))
-        $id_rama = "'".$array['id_rama']."'";
+    if(isset($array['unidad_medida']) && !empty($array['unidad_medida']))
+        $unidad_medida = "'".$array['unidad_medida']."'";
     else
-        $id_rama = " NULL " ;
+        $unidad_medida = " NULL " ;
  
 
     chrome_log("call sp_abm_recurso(  
                                     '$accion', 
                                      $id_recurso, 
                                      $nombre_recurso ,
-                                     $id_rama,  
+                                     $unidad_medida,  
                                      @pi_id_recurso_new,
                                      @pv_error_msj, 
                                      @pn_error_cod   )");
@@ -83,7 +84,7 @@ function abm_recurso($accion, $array)
                                     '$accion', 
                                      $id_recurso, 
                                      $nombre_recurso ,  
-                                     $id_rama,
+                                     $unidad_medida,
                                      @pi_id_recurso_new,
                                      @pv_error_msj, 
                                      @pn_error_cod   )"  );

@@ -136,7 +136,7 @@ public function modifica_recurso()
  
 		if ( $query['codigo_error'] == 0 ): // OK
 		 	
-		 	$mensaje['mensaje'] = 'recurso modificada exitosamente';
+		 	$mensaje['mensaje'] = 'Recurso modificada exitosamente';
 			$mensaje['clase_mensaje'] = 'success';
 			$this->session->set_flashdata('mensaje',$mensaje );
 					 				 

@@ -59,15 +59,15 @@
                     </div>
 
                     <div class="col-sm-12 ">
-                        <label for="nombre_recurso"  class="col-sm-3 control-label">Unidad Medida</label>
+                        <label for="unidad_medida"  class="col-sm-3 control-label">Unidad Medida</label>
                         <div class="col-sm-9">
                             <span style="right: -10px;" class="campo_requerido  form-control-feedback">*</span>
  
                             <? 
                               $data = array(
                                       'type'  => 'text',
-                                      'name'  => 'nombre_recurso',
-                                      'id'    => 'nombre_recurso', 
+                                      'name'  => 'unidad_medida',
+                                      'id'    => 'unidad_medida', 
                                       'class' => 'form-control'
                               );
 
@@ -75,7 +75,7 @@
 
                             ?>
                         </div>
-                        <? echo mostrar_error_formulario($error, 'nombre_recurso');?>
+                        <? echo mostrar_error_formulario($error, 'unidad_medida');?>
                     </div>
 
                     <div class="col-xs-12" style="margin-top:20px; margin-bottom:20px" >

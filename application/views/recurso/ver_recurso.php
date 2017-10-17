@@ -73,12 +73,33 @@
                         </div>
                         <? echo mostrar_error_formulario($error, 'nombre_recurso');?>
                     </div>
+
+                    <div class="form-group has-feedback">
+                        <label for="unidad_medida"  class="col-sm-3 control-label">Unidad medida</label>
+                        <div class="col-sm-9">
+                            <span style="right: -10px;" class="campo_requerido  form-control-feedback">*</span>
+ 
+                            <? 
+                              $data = array(
+                                      'type'  => 'text',
+                                      'name'  => 'unidad_medida',
+                                      'value'  => $recurso->unidad_medida,
+                                      'id'    => 'unidad_medida', 
+                                      'class' => 'form-control'
+                              );
+
+                              echo form_input($data);
+
+                            ?>
+                        </div>
+                        <? echo mostrar_error_formulario($error, 'unidad_medida');?>
+                    </div>
                     
                     
 
 
                    <div class="col-xs-12" style="margin-top:20px; margin-bottom:20px" >
-                      <button disabled="disabled"  type="submit" class="btn btn-primary btn-block"> Modificar <div id="div_loadding_modifica_recurso" class="form-control-feedback"  style='margin-right:25px'><img src="<?=base_url()?>assets/images/loading_blanco.gif" ></div>  </button>   
+                      <button    type="submit" class="btn btn-primary btn-block"> Modificar <div id="div_loadding_modifica_recurso" class="form-control-feedback"  style='margin-right:25px'><img src="<?=base_url()?>assets/images/loading_blanco.gif" ></div>  </button>   
                     </div>
 
                     <? echo form_close(); ?>
