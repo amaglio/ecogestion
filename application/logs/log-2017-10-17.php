@@ -40,3 +40,23 @@ ERROR - 2017-10-17 16:17:54 --> Query error: Unknown column 'fecha' in 'field li
     			FROM necesidad r 
     			WHERE id_necesidad = '1' 
 ERROR - 2017-10-17 16:22:53 --> Could not find the language line "form_validation_is_numeri"
+ERROR - 2017-10-17 17:20:20 --> Severity: Notice --> Undefined variable: necesidad /var/www/html/ecogestion/application/views/trabajo/ver_trabajo.php 185
+ERROR - 2017-10-17 17:20:20 --> Severity: Notice --> Trying to get property of non-object /var/www/html/ecogestion/application/views/trabajo/ver_trabajo.php 185
+ERROR - 2017-10-17 17:20:20 --> Severity: Notice --> Undefined variable: trabajos /var/www/html/ecogestion/application/views/trabajo/ver_trabajo.php 203
+ERROR - 2017-10-17 17:20:20 --> Severity: Error --> Call to a member function result() on a non-object /var/www/html/ecogestion/application/views/trabajo/ver_trabajo.php 203
+ERROR - 2017-10-17 17:20:20 --> Severity: Notice --> Undefined variable: necesidad /var/www/html/ecogestion/application/views/trabajo/ver_trabajo.php 185
+ERROR - 2017-10-17 17:20:20 --> Severity: Notice --> Trying to get property of non-object /var/www/html/ecogestion/application/views/trabajo/ver_trabajo.php 185
+ERROR - 2017-10-17 17:20:20 --> Severity: Notice --> Undefined variable: trabajos /var/www/html/ecogestion/application/views/trabajo/ver_trabajo.php 203
+ERROR - 2017-10-17 17:20:20 --> Severity: Error --> Call to a member function result() on a non-object /var/www/html/ecogestion/application/views/trabajo/ver_trabajo.php 203
+ERROR - 2017-10-17 17:20:44 --> Severity: Notice --> Undefined variable: trabajos /var/www/html/ecogestion/application/views/trabajo/ver_trabajo.php 178
+ERROR - 2017-10-17 17:20:44 --> Severity: Error --> Call to a member function num_rows() on a non-object /var/www/html/ecogestion/application/views/trabajo/ver_trabajo.php 178
+ERROR - 2017-10-17 17:20:44 --> Severity: Notice --> Undefined variable: trabajos /var/www/html/ecogestion/application/views/trabajo/ver_trabajo.php 178
+ERROR - 2017-10-17 17:20:44 --> Severity: Error --> Call to a member function num_rows() on a non-object /var/www/html/ecogestion/application/views/trabajo/ver_trabajo.php 178
+ERROR - 2017-10-17 17:20:44 --> Severity: Notice --> Undefined variable: trabajos /var/www/html/ecogestion/application/views/trabajo/ver_trabajo.php 178
+ERROR - 2017-10-17 17:20:44 --> Severity: Error --> Call to a member function num_rows() on a non-object /var/www/html/ecogestion/application/views/trabajo/ver_trabajo.php 178
+ERROR - 2017-10-17 17:20:45 --> Severity: Notice --> Undefined variable: trabajos /var/www/html/ecogestion/application/views/trabajo/ver_trabajo.php 178
+ERROR - 2017-10-17 17:20:45 --> Severity: Error --> Call to a member function num_rows() on a non-object /var/www/html/ecogestion/application/views/trabajo/ver_trabajo.php 178
+ERROR - 2017-10-17 17:21:22 --> Severity: Notice --> Undefined variable: trabajos /var/www/html/ecogestion/application/views/trabajo/ver_trabajo.php 178
+ERROR - 2017-10-17 17:21:22 --> Severity: Error --> Call to a member function num_rows() on a non-object /var/www/html/ecogestion/application/views/trabajo/ver_trabajo.php 178
+ERROR - 2017-10-17 17:21:22 --> Severity: Notice --> Undefined variable: trabajos /var/www/html/ecogestion/application/views/trabajo/ver_trabajo.php 178
+ERROR - 2017-10-17 17:21:22 --> Severity: Error --> Call to a member function num_rows() on a non-object /var/www/html/ecogestion/application/views/trabajo/ver_trabajo.php 178

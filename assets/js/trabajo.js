@@ -123,3 +123,9 @@ function eliminar_trabajo(id_trabajo)
      
   }
 }
+
+
+function ver_crear_necesidad()
+{
+   jq_dt("div_crear_necesidad").show();
+}

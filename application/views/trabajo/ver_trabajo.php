@@ -9,6 +9,9 @@
   #div_loadding_crear_necesidad{
         display: none; 
     }  
+ 
+
+
 </style>
 
 <div class="content-wrapper">
@@ -20,13 +23,22 @@
     <div class="panel-body">
         
         <div class="col-md-12" style="margin-bottom: 10px">
+
           <button type="submit" class="btn btn-sm btn-primary "  onclick="eliminar_trabajo(<?=$informacion_trabajo->id_trabajo?>)"> 
               <i class="fa fa-1x fa-times" aria-hidden="true" style="padding-left:5px"></i> Eliminar trabajo
           </button>
+
+          <button type="submit" class="btn btn-sm btn-warning" onclick="ver_crear_necesidad()"> 
+              <i class="fa fa-1x fa-plus" aria-hidden="true" style="padding-left:5px"></i> Crear necesidad
+          </button>
+
         </div>
+
  
       	<!-- Ver trabajo Y crear -->
       	<div class="col-md-5">
+           
+
             <!-- Ver trabajo  -->
             <div class="box box-primary">
                 <div class="box-header with-border">
@@ -142,41 +154,39 @@
                 </div>
             </div>
       	    
-            <!-- crear  -->
-            <div class="box box-primary">
+            <!-- Crear necesidad--> 
+            <div class="box box-primary" >
                 <div class="box-header with-border">
-                    <h3 class="box-title"> Crear trabajo</h3>
+                    <h3 class="box-title">Crear Necesidad</h3>
                     <div class="box-tools pull-right">
                       <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                       <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                     </div>
                 </div> 
-                <div class="box-body"> 
+                <div class="box-body">
 
-                  <? 
+                    <? 
                     $attributes = array('class' => 'form', 'id' => 'form_alta_necesidad', 'name' => 'form_alta_necesidad');
                     echo form_open('necesidad/alta_necesidad', $attributes); ?>
 
                     <div class="form-group has-feedback">
-                        <label for="area"  class="col-sm-3 control-label">Area</label>
+                        <label for="Trabajo"  class="col-sm-3 control-label">Trabajo</label>
                         <div class="col-sm-9">
                             <span style="right: -10px;" class="campo_requerido  form-control-feedback">*</span>
  
-                            <?  $area = array(); ?>
+                            <?  $trabajo = array(); ?>
 
-                            <?  $area[''] = 'Seleccionar area'; ?>
-                            
-                            <?  foreach ($areas->result() as $row):  
+                            <?  $trabajo[''] = 'Seleccionar trabajo';
+                      
+                                $trabajo[$informacion_trabajo->id_trabajo] = $informacion_trabajo->id_trabajo."-".$informacion_trabajo->descripcion;
 
-                                    $area[$row->id_area] = $row->id_area."-".$row->nombre;
+                                echo form_dropdown('id_trabajo', $trabajo, $informacion_trabajo->id_trabajo ,'class="form-control" id="id_trabajo" name="id_trabajo" readonly="readonly" ' );   
 
-                                endforeach; 
+                            ?>                         
 
-                              echo form_dropdown('id_area', $area, $row->id_area ,'class="form-control" id="id_area" name="id_area"  disabled="disabled" '); 
 
-                            ?>
                         </div>
-                        <? echo mostrar_error_formulario($error, 'id_area');?>
+                        <? echo mostrar_error_formulario($error, 'id_trabajo');?>
                     </div>
 
                     <div class="form-group has-feedback">
@@ -186,10 +196,10 @@
  
                             <? 
                               $data = array(
-                                      'type'  => 'date',
+                                      'type'  => 'text',
                                       'name'  => 'fecha_limite',
                                       'id'    => 'fecha_limite', 
-                                      'class' => 'form-control'
+                                      'class' => 'form-control calendario'
                               );
 
                               echo form_input($data);
@@ -227,9 +237,9 @@
  
 
                     <? echo form_close(); ?>
-                     
+
                 </div>
-            </div> 
+            </div>
         </div>
 
         <!-- Necesidades del trabajo -->
@@ -249,8 +259,7 @@
                         <thead>
 
                           <tr style="background-color: rgba(60, 141, 188, 0.35);">
-                              <th>Id</th>
-                              <th>Trabajo</th>   
+                              <th>Id</th> 
                               <th>Comentario </th>  
                               <th>Fecha Limite </th>
                               <th> </th> 
@@ -262,8 +271,7 @@
                         <? foreach ($necesidades_trabajo->result() as $row): ?>
 
                             <tr>
-                              <td> <?=$row->id_necesidad?> </td>
-                              <td> <?=$row->descripcion_trabajo?> </td> 
+                              <td> <?=$row->id_necesidad?> </td> 
                               <td> <?=$row->comentario?> </td>
                               <td> <?=$row->fecha_limite?> </td>  
                               <td> 
@@ -317,6 +325,22 @@ var jq_va = jQuery.noConflict();
 </script>
  
 
+<!-- Datepicker -->
+<script src="<?=base_url()?>assets/plugins/datepicker/bootstrap-datepicker.js"></script>
+ 
 
 <script language="javascript" type="text/javascript" src="<?=base_url()?>assets/js/trabajo.js" ></script>
 <script language="javascript" type="text/javascript" src="<?=base_url()?>assets/js/necesidad.js" ></script>
+
+<script type="text/javascript">
+  
+
+function ver_crear_necesidad()
+{
+  jq_va("div_crear_necesidad").show();
+   alert("aaa");
+}
+
+  
+
+</script>
