@@ -17,7 +17,7 @@ jq_va(function(){
         messages : {  
 
                 descripcion : {
-                     required : "Debe ingresar el nombre del trabajo"
+                     required : "Debe ingresar la descripcio/nombre del trabajo"
                 },
                 id_area : {
                      required : "Debe seleccionar el area"
@@ -43,7 +43,10 @@ jq_va(function(){
                 },
                 id_area : {
                     required : true
-                }
+                },
+                 descripcion : {
+                     required : true
+                },
         },
         messages : {  
 
@@ -52,7 +55,10 @@ jq_va(function(){
                 },
                 id_area : {
                      required : "Debe seleccionar el area"
-                }
+                },
+                descripcion : {
+                     required : "Debe ingresar la descripcio/nombre del trabajo"
+                },
         },
         submitHandler: function(form) {
 
@@ -93,7 +99,7 @@ jq_dt(document).ready(function() {
 
 function eliminar_trabajo(id_trabajo)
 {
-  if (confirm('Seguro desea eliminar el trabajo? El trabajo sera desasignado de todos los trabajos')) 
+  if (confirm('Seguro desea eliminar el trabajo? ')) 
   {     
     
         $.ajax({
@@ -117,7 +123,7 @@ function eliminar_trabajo(id_trabajo)
                   }
                 },
                 error: function(x, status, error){
-                  alert(error);
+                 window.location = CI_ROOT+'index.php/trabajo/index'
                 }
           });   
      
@@ -129,3 +135,10 @@ function ver_crear_necesidad()
 {
    jq_dt("div_crear_necesidad").show();
 }
+
+/*------- FECHA DE LA NECESIDAD -----*/
+
+jq_dt('.calendario').datepicker({
+    autoclose: true,
+    format: 'dd/mm/yyyy'
+  });

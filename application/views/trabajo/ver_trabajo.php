@@ -48,96 +48,168 @@
                       <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                     </div>
                 </div> 
-                <div class="box-body">
+                <div class="box-body" style="padding:15px;">
 
                      <? mensaje_resultado($mensaje); ?>
 
                     <? 
                     $attributes = array('class' => 'form', 'id' => 'form_modifica_trabajo', 'name' => 'form_modifica_trabajo');
                     echo form_open('trabajo/modifica_trabajo', $attributes); ?>
+                    
+                    <div class="row">
+                        <label for="trabajo"  class="col-sm-4 class-label">Id trabajo</label>
+                        <div class="col-sm-8"> 
 
+                             <? 
+                           $data = array(
+                                      'name'        => 'id_trabajo',
+                                      'id'          => 'id_trabajo', 
+                                      'rows'        => '2', 
+                                      'class'       => 'form-control',
+                                      'value'       => $informacion_trabajo->id_trabajo,
+                                      'readonly' =>'readonly'
+
+
+                                  );
+
+                                  echo form_input($data);
+
+                            ?>
+
+                        </div>
+                    </div>
  
-                    <div class="form-group has-feedback">
-                        <label for="id_trabajo"  class="col-sm-3 control-label">ID</label>
-                        <div class="col-sm-9">
-                            <span style="right: -10px;" class="campo_requerido  form-control-feedback">*</span>
+                   <div class="row">
+                        <label for="trabajo"  class="col-sm-4 class-label">Descripción</label>
+                        <div class="col-sm-8"> 
 
-                            <?
+                             <? 
+                           $data = array(
+                                      'name'        => 'descripcion',
+                                      'id'          => 'descripcion', 
+                                      'rows'        => '2', 
+                                      'class'       => 'form-control',
+                                      'value'       => $informacion_trabajo->descripcion
 
-                              $data = array(
-                                      'type'  => 'text',
-                                      'name'  => 'id_trabajo',
-                                      'id'    => 'id_trabajo',
-                                      'value' => $informacion_trabajo->id_trabajo,
-                                      'readonly'  => 'readonly',
-                                      'class' => 'form-control'
-                              );
+                                  );
 
-                              echo form_input($data);
-                             ?>
+                                  echo form_textarea($data);
+
+                            ?>
+
                         </div>
                     </div>
 
-                    <div class="form-group has-feedback">
-                        <label for="id_trabajo_tango"  class="col-sm-3 control-label">ID tango</label>
-                        <div class="col-sm-9">
-                            <span style="right: -10px;" class="campo_requerido  form-control-feedback">*</span>
+                    <div class="row">
+                        <label for="fecha_inicio"  class="col-sm-4 class-label">Fecha inicio</label>
+                        <div class="col-sm-8"> 
 
-                            <?
+                             <? 
+                           $data = array(
+                                      'name'        => 'fecha_inicio',
+                                      'id'          => 'fecha_inicio',  
+                                      'class'       => 'form-control calendario',
+                                      'value'       => $informacion_trabajo->fecha_inicio
+                                  );
 
-                              $data = array(
-                                      'type'  => 'text',
-                                      'name'  => 'id_trabajo_tango',
-                                      'id'    => 'id_trabajo_tango',
-                                      'value' => $informacion_trabajo->id_trabajo_tango,
-                                      'class' => 'form-control'
-                              );
+                                  echo form_input($data);
 
-                              echo form_input($data);
-                             ?>
+                            ?>
+
                         </div>
                     </div>
 
-                     <div class="form-group has-feedback">
-                        <label for="id_area"  class="col-sm-3 control-label">Area</label>
-                        <div class="col-sm-9">
+                    <div class="row">
+                        <label for="fecha_fin"  class="col-sm-4 class-label">Fecha fin</label>
+                        <div class="col-sm-8"> 
+
+                             <? 
+                           $data = array(
+                                      'name'        => 'fecha_fin',
+                                      'id'          => 'fecha_fin', 
+                                      'rows'        => '5', 
+                                      'class'       => 'form-control calendario',
+                                      'value'       => $informacion_trabajo->fecha_fin
+                                  );
+
+                                  echo form_input($data);
+
+                            ?>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <label for="nombre_area"  class="col-sm-4 control-label">Area</label>
+                        <div class="col-sm-8">
                             <span style="right: -10px;" class="campo_requerido  form-control-feedback">*</span>
  
                             <?  $area = array(); ?>
 
                             <?  $area[''] = 'Seleccionar Area'; ?>
+
+                            <?  if($areas->num_rows() > 0): ?>
                             
-                            <?  foreach ($areas->result() as $row):  
+                                  <?  foreach ($areas->result() as $row):  
 
-                                    $area[$row->id_area] = $row->nombre;
+                                          $area[$row->id_area] = $row->nombre;
 
-                                endforeach; 
+                                      endforeach; 
 
-                              echo form_dropdown('id_area', $area , $informacion_trabajo->id_area ,'class="form-control" id="id_area" name="id_area" ' ); 
+                                      echo form_dropdown('id_area', $area,   $informacion_trabajo->id_area ,'class="form-control" id="id_area" name="id_area" ' );  ?>
 
-                            ?>
+                                
+                            <?  else: ?>                          
+
+                                        <div class="alert alert-warning">
+                                          <strong>No hay Areas!</strong> Primero debe <a href="<?=base_url()?>index.php/area/index" >crear un area</a> para crear necesidades.
+                                        </div>
+
+                            <?   endif; ?>
+
                         </div>
-                        <? echo mostrar_error_formulario($error, 'id_area');?> 
+                        <? echo mostrar_error_formulario($error, 'id_area');?>
                     </div>
 
 
-                    <div class="form-group has-feedback">
-                        <label for="trabajo"  class="col-sm-3 control-label">Descripción</label>
-                        <div class="col-sm-9">
+                    <div class="row">
+                        <label for="id_trabajo_tango"  class="col-sm-4 control-label">ID trabajo Tango</label>
+                        <div class="col-sm-8">
                             <span style="right: -10px;" class="campo_requerido  form-control-feedback">*</span>
-
-                            <?
-
-                              $data = array( 
-                                      'rows'  => 2,
-                                      'name'  => 'descripcion',
-                                      'id'    => 'descripcion',
-                                      'value' => $informacion_trabajo->descripcion,
-                                      'class' => 'form-control'
+ 
+                            <? 
+                              $data = array(
+                                      'type'  => 'text',
+                                      'name'  => 'id_trabajo_tango',
+                                      'id'    => 'id_trabajo_tango', 
+                                      'class' => 'form-control',
+                                      'value'       => $informacion_trabajo->id_trabajo_tango
                               );
 
-                              echo form_textarea($data);
-                             ?>
+                              echo form_input($data);
+
+                            ?>
+                        </div>
+                        <? echo mostrar_error_formulario($error, 'id_trabajo_tango');?>
+                    </div>
+                    
+                     <div class="row">
+                        <label for="comentario"  class="col-sm-4 class-label">Comentario</label>
+                        <div class="col-sm-8"> 
+
+                             <? 
+                           $data = array(
+                                      'name'        => 'comentario',
+                                      'id'          => 'comentario', 
+                                      'rows'        => '5', 
+                                      'class'       => 'form-control',
+                                      'value'       => $informacion_trabajo->comentario
+                                  );
+
+                                  echo form_textarea($data);
+
+                            ?>
+
                         </div>
                     </div>
 

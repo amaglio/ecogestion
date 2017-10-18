@@ -26,7 +26,7 @@ function traer_trabajos()
 function traer_informacion_trabajo($id_trabajo)
 {
 
-	$sql =	"	SELECT t.*, a.nombre as nombre_area
+	$sql =	"	SELECT t.*, a.nombre as nombre_area,  DATE_FORMAT(t.fecha_inicio, '%d/%m/%Y') AS fecha_inicio,  DATE_FORMAT(t.fecha_fin, '%d/%m/%Y') AS fecha_fin
                 FROM trabajo t, area a
                 WHERE t.id_area = a.id_area
                 AND t.id_trabajo = ? "  ;
@@ -45,45 +45,74 @@ function abm_trabajo($accion, $array)
         $id_trabajo = " NULL " ;
 
 
-    if(isset($array['trabajo']) && !empty($array['trabajo']))
-        $trabajo = "'".$array['trabajo']."'";
+    if(isset($array['id_trabajo_tango']) && !empty($array['id_trabajo_tango']))
+        $id_trabajo_tango = "'".$array['id_trabajo_tango']."'";
     else
-        $trabajo = " NULL " ;
+        $id_trabajo_tango = " NULL " ;
 
-    $modulos = '';
 
-    if(isset($array['id_modulo']) && !empty($array['id_modulo'])):
+    if(isset($array['descripcion']) && !empty($array['descripcion']))
+        $descripcion = "'".$array['descripcion']."'";
+    else
+        $descripcion = " NULL " ;
 
-    	foreach ($array['id_modulo'] as $row) 
-    	{
-    		$modulos .=  $row."-";
-    	}	
-        
-        $modulos = "'".$modulos."'";
+    if(isset($array['id_area']) && !empty($array['id_area']))
+        $id_area = "'".$array['id_area']."'";
+    else
+        $id_area = " NULL " ;
+
+    if(isset($array['id_trabajo_estado']) && !empty($array['id_trabajo_estado']))
+        $id_trabajo_estado = "'".$array['id_trabajo_estado']."'";
+    else
+        $id_trabajo_estado = " NULL " ;
+
+
+    $id_usuario_operador = $this->session->userdata('eco_id');
+
+    if(isset($array['fecha_inicio']) && !empty($array['fecha_inicio'])):
+
+        $array_fecha = explode("/", $array['fecha_inicio']);
+        $fecha_inicio = "'".$array_fecha[2]."-".$array_fecha[1]."-".$array_fecha[0]."'";
         
     else:
 
-        $modulos = " NULL " ;
+        $fecha_inicio = " NULL " ;
 
     endif;
 
- 	chrome_log("call sp_abm_trabajo(  
-									'$accion', 
-									 $id_trabajo, 
-									 $trabajo, 
-									 $modulos ,   
-									 @pi_id_trabajo_new,
-									 @pv_error_msj, 
-									 @pn_error_cod	 )");
+
+    if(isset($array['fecha_fin']) && !empty($array['fecha_fin'])):
+
+        $array_fecha = explode("/", $array['fecha_fin']);
+        $fecha_fin = "'".$array_fecha[2]."-".$array_fecha[1]."-".$array_fecha[0]."'";
+        
+    else:
+
+        $fecha_fin = " NULL " ;
+
+    endif;
+
+     if(isset($array['comentario']) && !empty($array['comentario']))
+        $comentario = "'".$array['comentario']."'";
+    else
+        $comentario = " NULL " ;
+
+ 
 
  	$this->db->query("call sp_abm_trabajo(  
 									'$accion', 
-									 $id_trabajo, 
-									 $trabajo, 
-									 $modulos ,   
-									 @pi_id_trabajo_new,
-									 @pv_error_msj, 
-									 @pn_error_cod	 )");
+									$id_trabajo, 
+									$id_trabajo_tango, 
+									$descripcion ,   
+                                    $id_area,
+                                    $id_trabajo_estado,
+                                    '$id_usuario_operador',
+                                    $fecha_inicio,
+                                    $fecha_fin,
+                                    $comentario,
+									@pi_id_trabajo_new,
+									@pv_error_msj, 
+									@pn_error_cod	 )");
 
  	$sql = "SELECT 	@pi_id_trabajo_new as id_trabajo, 
  					@pn_error_cod as codigo_error , 

@@ -467,6 +467,7 @@ $config = array(
                                 ),
 
 // --------------------------------- TRABAJO ------------------------------
+
              'ver_trabajo' => array(
                                      array(
                                             'field' => 'id_trabajo',
@@ -475,6 +476,53 @@ $config = array(
                                         )
                                 ),
 
+             'alta_trabajo' => array(
+                                     array(
+                                            'field' => 'id_trabajo_tango',
+                                            'label' => 'id_trabajo_tango',
+                                            'rules' => 'trim|xss_clean|is_numeric'
+                                        ),
+                                    array(
+                                            'field' => 'id_area',
+                                            'label' => 'id_area',
+                                            'rules' => 'required|trim|xss_clean|is_numeric'
+                                        ),
+                                     array(
+                                            'field' => 'descripcion',
+                                            'label' => 'descripcion',
+                                            'rules' => 'required|trim|xss_clean'
+                                        )
+                                ),
+             'modifica_trabajo' => array(
+                                     array(
+                                            'field' => 'id_trabajo_tango',
+                                            'label' => 'id_trabajo_tango',
+                                            'rules' => 'trim|xss_clean|is_numeric'
+                                        ),
+                                        array(
+                                            'field' => 'id_trabajo',
+                                            'label' => 'id_trabajo',
+                                            'rules' => 'required|trim|xss_clean|is_numeric'
+                                        ),
+                                    array(
+                                            'field' => 'id_area',
+                                            'label' => 'id_area',
+                                            'rules' => 'required|trim|xss_clean|is_numeric'
+                                        ),
+                                     array(
+                                            'field' => 'descripcion',
+                                            'label' => 'descripcion',
+                                            'rules' => 'required|trim|xss_clean'
+                                        )
+                                ),
+
+              'baja_trabajo' => array(
+                                     array(
+                                            'field' => 'id_trabajo',
+                                            'label' => 'id_trabajo',
+                                            'rules' => 'required|trim|xss_clean|is_numeric'
+                                        ) 
+                                ),
 
 );
 

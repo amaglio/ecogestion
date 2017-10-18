@@ -69,13 +69,18 @@ public function alta_trabajo()
 
 		chrome_log("No Paso validacion");
 		$mensaje['mensaje'] = 'No pasó la validación, intente nuevamente';
+		var_dump($this->form_validation->error_array());
+		 
 		$mensaje['clase_mensaje'] = 'danger';
 	 	$this->session->set_flashdata('mensaje',$mensaje);
-		$this->session->set_flashdata('error', $this->form_validation->error_array());
+		$this->session->set_flashdata('error', $this->form_validation->error_array());  
 	 
 	else:
+ 
 		chrome_log("Si Paso validacion");
 		
+		$_POST['id_trabajo_estado'] = 1; // Pendiente
+ 		
 		$query = $this->Trabajo_model->abm_trabajo( 'A', $this->input->post() );
  
 		if ( $query['codigo_error'] == 0 ): // OK
@@ -99,42 +104,59 @@ public function alta_trabajo()
 
 		 			$mensaje['mensaje'] = 'Error: falta algun parametro obligatorio';
 		 			break;
-		 		
-		 		case 1: // Alias duplicado
 
-		 			$mensaje['mensaje'] = 'Error, el trabajo ingresado ya existe, ingrese otro.';
+
+		 		case -3: // Parametro 'pc_accion' no reconocido
+
+		 			$mensaje['mensaje'] = 'Error: ha ocurrido un error interno, intente nuevamente';
+		 			break;
+
+
+		 		case -4: // : El id_trabajo no existe
+
+		 			$mensaje['mensaje'] = 'Error: el trabajo no existe';
+		 			break;
+		 		
+		 		
+		 		case -5: // : El id_trabajo no existe
+
+		 			$mensaje['mensaje'] = 'Error: el trabajo tiene necesidades asignadas, primero debe eliminarlas.';
 		 			break;
 		 	}
 			
 
-		endif;   
+		endif;    
 	
 	endif; 
 
 	$this->session->set_flashdata('mensaje', $mensaje );
-	redirect("trabajo/index");
+	redirect("trabajo/index"); 
 }
 
 public function modifica_trabajo()
 {
-	chrome_log("modificar_trabajo");
+	chrome_log("modifica_trabajo");
 
-	if ($this->form_validation->run('modificar_trabajo') == FALSE):  
+	if ($this->form_validation->run('modifica_trabajo') == FALSE):  
 
 		chrome_log("No Paso validacion");
 		$mensaje['mensaje'] = 'No pasó la validación, intente nuevamente';
 		$mensaje['clase_mensaje'] = 'danger';
 	 	$this->session->set_flashdata('mensaje',$mensaje);
 		$this->session->set_flashdata('error', $this->form_validation->error_array());
+
+		var_dump($this->form_validation->error_array());
 	 
 	else:
 		chrome_log("Si Paso validacion");
+
+		$_POST['id_trabajo_estado'] = 2; // En curso
 		
 		$query = $this->Trabajo_model->abm_trabajo( 'M', $this->input->post() );
 
 		if ( $query['codigo_error'] == 0 ): // OK
  
-			$mensaje['mensaje'] = 'Trabajo creado exitosamente';
+			$mensaje['mensaje'] = 'Trabajo modificado exitosamente';
 			$mensaje['clase_mensaje'] = 'success'; 
 					 				 
 		else:  
@@ -153,20 +175,33 @@ public function modifica_trabajo()
 
 		 			$mensaje['mensaje'] = 'Error: falta algun parametro obligatorio';
 		 			break;
-		 		
-		 		case 1: // Alias duplicado
 
-		 			$mensaje['mensaje'] = 'Error, el trabajo ingresado ya existe, ingrese otro.';
+
+		 		case -3: // Parametro 'pc_accion' no reconocido
+
+		 			$mensaje['mensaje'] = 'Error: ha ocurrido un error interno, intente nuevamente';
+		 			break;
+
+
+		 		case -4: // : El id_trabajo no existe
+
+		 			$mensaje['mensaje'] = 'Error: el trabajo no existe';
+		 			break;
+		 		
+		 		
+		 		case -5: // : El id_trabajo no existe
+
+		 			$mensaje['mensaje'] = 'Error: el trabajo tiene necesidades asignadas, primero debe eliminarlas.';
 		 			break;
 		 	}
 			
 
-		endif;   
+		endif;     
 
 	endif; 
 
 	$this->session->set_flashdata('mensaje', $mensaje );
-	redirect("trabajo/index/" );
+	redirect("trabajo/trabajo/".$this->input->post('id_trabajo') );
 }
 
 public function baja_trabajo()
@@ -203,20 +238,29 @@ public function baja_trabajo()
 		 		case -1: // Error mysql
 
 		 		 	$mensaje['mensaje'] = 'Error: ha ocurrido un error interno, intente nuevamente';
-		 			$return["error"] = TRUE;
 		 			break;
 
 		 		case -2: // Falta algun parametro
 
 		 			$mensaje['mensaje'] = 'Error: falta algun parametro obligatorio';
-		 			$return["error"] = TRUE;
 		 			break;
 
-		 		
-		 		case 1: // Alias duplicado
 
-		 			$mensaje['mensaje'] = 'Error, el trabajo ingresado ya existe, ingrese otro.';
-		 			$return["error"] = TRUE;
+		 		case -3: // Parametro 'pc_accion' no reconocido
+
+		 			$mensaje['mensaje'] = 'Error: ha ocurrido un error interno, intente nuevamente';
+		 			break;
+
+
+		 		case -4: // : El id_trabajo no existe
+
+		 			$mensaje['mensaje'] = 'Error: el trabajo no existe';
+		 			break;
+		 		
+		 		
+		 		case -5: // : El id_trabajo no existe
+
+		 			$mensaje['mensaje'] = 'Error: el trabajo tiene necesidades asignadas, primero debe eliminarlas.';
 		 			break;
 		 	}
 			

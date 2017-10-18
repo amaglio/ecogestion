@@ -63,16 +63,26 @@
                             <?  $rama = array(); ?>
 
                             <?  $rama[''] = 'Seleccionar Rama'; ?>
+
+                            <?  if( $ramas->num_rows() > 0 ):  ?>
                             
-                            <?  foreach ($ramas->result() as $row):  
+                                <?  foreach ($ramas->result() as $row):  
 
-                                    $rama[$row->id_rama] = $row->nombre;
+                                        $rama[$row->id_rama] = $row->nombre;
 
-                                endforeach; 
+                                    endforeach; 
 
-                              echo form_dropdown('id_rama', $rama, '' ,'class="form-control" id="id_rama" name="id_rama" ' ); 
+                                    echo form_dropdown('id_rama', $rama, '' ,'class="form-control" id="id_rama" name="id_rama" ' ); 
+                                ?>
 
-                            ?>
+
+                            <?  else: ?>                          
+
+                                        <div class="alert alert-warning">
+                                          <strong>No hay ramas!</strong> Primero debe <a href="<?=base_url()?>index.php/rama/index" >crear un rama</a> para crear trabajos.
+                                        </div>
+
+                            <?   endif; ?>
                         </div>
                         <? echo mostrar_error_formulario($error, 'id_rama');?>
                     </div>

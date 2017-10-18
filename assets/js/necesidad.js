@@ -72,7 +72,7 @@ jq_dt(document).ready(function() {
                 "bFilter": true,
                 "language": {
                     "lengthMenu": "Mostrando _MENU_ necesidades por pagina.",
-                    "zeroRecords": "Ningun necesidad fue encontrado.",
+                    "zeroRecords": "Ningun necesidad fue encontrada.",
                     "info": "<b> Mostrando pagina _PAGE_ de _PAGES_ </b>",
                     "infoEmpty": "Ningun necesidad disponible",
                     "infoFiltered": "(Filtrado de _MAX_ necesidades totales)",
@@ -91,7 +91,7 @@ jq_dt(document).ready(function() {
 
 function eliminar_necesidad(id_necesidad)
 {
-  if (confirm('Seguro desea eliminar el necesidad? El necesidad sera desasignado de todos los necesidades')) 
+  if (confirm('Seguro desea eliminar el necesidad ?')) 
   {     
     
         $.ajax({
