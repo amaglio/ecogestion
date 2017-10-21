@@ -71,6 +71,8 @@ public function alta_necesidad()
 		$mensaje['clase_mensaje'] = 'danger';
 	 	$this->session->set_flashdata('mensaje',$mensaje);
 		$this->session->set_flashdata('error', $this->form_validation->error_array());
+
+		var_dump($this->form_validation->error_array());
 	 
 	else:
 
@@ -118,7 +120,14 @@ public function alta_necesidad()
 	endif; 
 
 	$this->session->set_flashdata('mensaje', $mensaje );
-	redirect("necesidad/index");
+
+	$this->load->library('user_agent');
+
+	if( strpos($this->agent->referrer(), 'trabajo' ) )
+		redirect($this->agent->referrer());
+	else
+		redirect("necesidad/index"); 
+
 }
 
 public function modifica_necesidad()

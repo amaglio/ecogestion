@@ -21,6 +21,8 @@
       </h4>
     </section>
     <div class="panel-body">
+
+         <? mensaje_resultado($mensaje); ?>
         
         <div class="col-md-12" style="margin-bottom: 10px">
 
@@ -34,7 +36,7 @@
 
         </div>
 
- 
+        
       	<!-- Ver trabajo Y crear -->
       	<div class="col-md-5">
            
@@ -50,7 +52,7 @@
                 </div> 
                 <div class="box-body" style="padding:15px;">
 
-                     <? mensaje_resultado($mensaje); ?>
+                    
 
                     <? 
                     $attributes = array('class' => 'form', 'id' => 'form_modifica_trabajo', 'name' => 'form_modifica_trabajo');
@@ -229,38 +231,31 @@
             <!-- Crear necesidad--> 
             <div class="box box-primary" >
                 <div class="box-header with-border">
-                    <h3 class="box-title">Crear Necesidad</h3>
+                    <h3 class="box-title">Crear Necesidad para este trabajo</h3>
                     <div class="box-tools pull-right">
                       <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                       <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                     </div>
                 </div> 
-                <div class="box-body">
+                <div class="box-body"> 
 
                     <? 
                     $attributes = array('class' => 'form', 'id' => 'form_alta_necesidad', 'name' => 'form_alta_necesidad');
                     echo form_open('necesidad/alta_necesidad', $attributes); ?>
-
-                    <div class="form-group has-feedback">
-                        <label for="Trabajo"  class="col-sm-3 control-label">Trabajo</label>
-                        <div class="col-sm-9">
-                            <span style="right: -10px;" class="campo_requerido  form-control-feedback">*</span>
  
-                            <?  $trabajo = array(); ?>
+                     <? 
+                      $data = array( 
+                              'type'  => 'hidden',
+                              'name'  => 'id_trabajo',
+                              'id'    => 'id_trabajo', 
+                              'class' => 'form-control',
+                              'value' => $informacion_trabajo->id_trabajo 
+                      );
 
-                            <?  $trabajo[''] = 'Seleccionar trabajo';
-                      
-                                $trabajo[$informacion_trabajo->id_trabajo] = $informacion_trabajo->id_trabajo."-".$informacion_trabajo->descripcion;
+                      echo form_input($data);
 
-                                echo form_dropdown('id_trabajo', $trabajo, $informacion_trabajo->id_trabajo ,'class="form-control" id="id_trabajo" name="id_trabajo" readonly="readonly" ' );   
-
-                            ?>                         
-
-
-                        </div>
-                        <? echo mostrar_error_formulario($error, 'id_trabajo');?>
-                    </div>
-
+                    ?>
+ 
                     <div class="form-group has-feedback">
                         <label for="fecha_limite"  class="col-sm-3 control-label">Fecha </label>
                         <div class="col-sm-9">
