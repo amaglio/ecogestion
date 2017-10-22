@@ -264,6 +264,46 @@ public function existe_recurso_validation($id_recurso=null)
 		return false; // Duplicado
 }
 
+public function ajax_recurso()
+{ 
+  chrome_log("ajax_recurso: " );
+
+  $buscar = $this->input->get('term');
+
+  if( isset($buscar) && strlen($buscar) > 1 )
+  {
+ 
+    $buscar = str_replace(" ", "%", $buscar); 
+    
+    $query=$this->db->query("  	SELECT 	r.id_recurso,
+    									r.descripcion,
+    									r.unidad_medida
+		                        FROM  recurso r
+		                        WHERE r.fecha_baja IS NULL
+		                        AND  	r.descripcion LIKE '%$buscar%'   
+		                        ORDER BY r.descripcion"
+                      
+                			);
+
+    
+    if($query->num_rows() > 0)
+    {
+      foreach ($query->result() as $row)
+      { 
+ 
+
+        $result[]= array(   "id_recurso" => utf8_encode($row->id_recurso) , 
+                  "value" => utf8_encode($row->descripcion) 
+                );
+
+       
+      }
+    } 
+    
+    echo json_encode($result);
+  }
+}
+
 }
 
 ?>

@@ -271,6 +271,77 @@ public function baja_necesidad()
 	print json_encode($return); 
 }
 
+
+public function asociar_recurso()
+{
+	chrome_log("alta_necesidad");
+
+	if ($this->form_validation->run('alta_necesidad') == FALSE):  
+
+		chrome_log("No Paso validacion");
+		$mensaje['mensaje'] = 'No pasó la validación, intente nuevamente';
+		$mensaje['clase_mensaje'] = 'danger';
+	 	$this->session->set_flashdata('mensaje',$mensaje);
+		$this->session->set_flashdata('error', $this->form_validation->error_array());
+
+		var_dump($this->form_validation->error_array());
+	 
+	else:
+
+		chrome_log("Si Paso validacion");
+
+		$query = $this->Necesidad_model->abm_necesidad( 'A', $this->input->post() );
+ 
+		if ( $query['codigo_error'] == 0 ): // OK
+		 	
+		 	$mensaje['mensaje'] = 'Necesidad creada exitosamente';
+			$mensaje['clase_mensaje'] = 'success'; 
+					 				 
+		else:  
+		 	
+		 	$mensaje['clase_mensaje'] = 'danger';
+
+		 	switch ($query['codigo_error']) 
+		 	{
+
+		 		case -1: // Error mysql
+
+		 		 	$mensaje['mensaje'] = 'Error: ha ocurrido un error interno, intente nuevamente';
+		 			break;
+
+		 		case -2: // Falta algun parametro
+
+		 			$mensaje['mensaje'] = 'Error: falta algun parametro obligatorio';
+		 			break;
+		 		
+		 		case -3: // Parametro 'pc_accion' no reconocido
+
+		 		 	$mensaje['mensaje'] = 'Error: ha ocurrido un error interno, intente nuevamente';
+		 			break;
+
+		 		case -4: // El id_necesidad no existe
+
+		 		 	$mensaje['mensaje'] = 'Error: ha ocurrido un error interno, intente nuevamente';
+		 			break;
+
+		 	}
+
+		
+		endif;
+
+	endif; 
+
+	$this->session->set_flashdata('mensaje', $mensaje );
+
+	$this->load->library('user_agent');
+
+	if( strpos($this->agent->referrer(), 'trabajo' ) )
+		redirect($this->agent->referrer());
+	else
+		redirect("necesidad/index"); 
+
+}
+
 public function existe_necesidad_validation($id_necesidad=null)
 {
 	if($this->Necesidad_model->existe_necesidad($id_necesidad)) 
@@ -278,6 +349,8 @@ public function existe_necesidad_validation($id_necesidad=null)
 	else 
 		return false; // Duplicado
 }
+
+
 
 }
 
