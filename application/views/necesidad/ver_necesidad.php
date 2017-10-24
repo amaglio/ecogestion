@@ -188,11 +188,13 @@
               </div> 
               <div class="box-body"> 
 
-                <div class="row">
-
                  <? 
                   $attributes = array('class' => 'form', 'id' => 'form_asociar_recurso', 'name' => 'form_asociar_recurso');
                   echo form_open('necesidad/asociar_recurso', $attributes); ?>
+
+                <div class="row">
+
+                
 
                   <input type="hidden" name="recurso_oculto" id="recurso_oculto" >
 
@@ -201,7 +203,8 @@
                       <div class="col-sm-9">
                           <span style="right: -10px;" class="campo_requerido  form-control-feedback">*</span>
 
-                          <? 
+                          <?php 
+
                             $data = array(
                                     'type'  => 'text',
                                     'name'  => 'recurso',
@@ -213,19 +216,19 @@
 
                           ?>
                       </div>
-                      <? echo mostrar_error_formulario($error, 'recurso');?>
+                      <?php echo mostrar_error_formulario($error, 'recurso');?>
                   </div>
 
                   <!-- SIN RESULTADO -->
                   <div class="row col-sm-12" id="sin_resultado" style="padding:15px;   text-align:center">
 
-                        No existe el recurso <a   id="button_cargar_recurso" onclick="mostrar_cargar_recurso()"   class="btn btn-xs" >Crear recurso</a>
+                        No existe el recurso <button id="button_cargar_recurso" onclick="mostrar_crear_recurso()"   class="btn btn-xs" >Crear recurso</button>
                   </div>
 
                   <!-- RECURSOS SELECCIONADOS -->
                   <div class="row col-sm-12" id="div_recurso_seleccionado">
                     <div class="col-sm-12" style="padding-bottom: 10px">
-                          <button class="btn btn-xs" onclick="ocultar_recurso_seleccinoado()"> 
+                          <button onclick="ocultar_recurso_seleccionado()" class="btn btn-xs"> 
                                 Cerrar <i class="fa fa-times" aria-hidden="true"></i>
                           </button> 
                     </div>  
@@ -242,9 +245,9 @@
                   <!-- CREAR RECURSO -->
                   <div class="row col-sm-12" id="div_crear_recurso">
                     <div class="col-sm-12" style="padding-bottom: 10px">
-                          <a class="btn btn-xs" onclick="ocultar_crear_recurso()"> 
+                          <button class="btn btn-xs" onclick="ocultar_crear_recurso()"> 
                                 Cerrar <i class="fa fa-times" aria-hidden="true"></i>
-                          </a> 
+                          </button> 
                     </div>  
                     <div class="col-sm-4"><label>Recurso</label>  </div>
                     <div class="col-sm-8">
@@ -252,7 +255,7 @@
                     </div>
                     <div class="col-sm-4"> <label>Unidad <br> Medida </label>  </div>
                     <div class="col-sm-8">
-                       <input readonly="readonly" type="text" class="form-control" id="unidad_medida" name="unidad_medida" placeholder=" Kg, unidad, mtrs..">
+                       <input type="text" class="form-control" id="unidad_medida" name="unidad_medida" placeholder=" Kg, unidad, mtrs..">
                     </div>               
                   </div>
 
@@ -279,14 +282,21 @@
 
                   <div class="row col-sm-12" style="margin-top:20px; margin-bottom:20px" >
 
-                    <button type="submit" class="btn btn-primary btn-block"> Asociar <div id="div_loadding_asociar_recurso" class="form-class-feedback"  style='margin-right:25px'><img src="<?=base_url()?>assets/images/loading_blanco.gif" ></div>  </button>   
+                    <button type="submit" class="btn btn-primary btn-block"> 
+
+                        Asociar <div id="div_loadding_asociar_recurso" class="form-class-feedback"  style='margin-right:25px'><img src="<?=base_url()?>assets/images/loading_blanco.gif" ></div>  
+
+                    </button>
+
                   </div>  
 
 
-                  <? echo form_close(); ?>
+                  
 
                 </div>
-                   
+                  
+                <? echo form_close(); ?>
+
               </div>
           </div>
 
@@ -358,7 +368,11 @@
 
 <script language="javascript" type="text/javascript" src="<?=base_url()?>assets/js/jquery.validate.js" ></script>
 <script language="javascript" type="text/javascript" src="<?=base_url()?>assets/js/additional-methods.js" ></script> 
-
+<!-- 
+<script language="javascript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+<script language="javascript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js"></script>
+<script language="javascript" type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.8/jquery.validate.min.js"></script>
+-->
 <script>
 var jq_va = jQuery.noConflict();
 </script>
@@ -390,6 +404,9 @@ var jq_va = jQuery.noConflict();
 
 <script type="text/javascript">
 
+ 
+
+
     jq_ui('#recurso').autocomplete({
           
           minLength: 3,
@@ -402,9 +419,13 @@ var jq_va = jQuery.noConflict();
               jq_ui("#div_recurso_seleccionado").show();
               jq_ui("#id_recurso").val(ui.item.id_recurso);
               jq_ui("#descripcion_recurso").val(ui.item.value);
-              jq_ui('#recurso').attr('disabled', true);
+              jq_ui('#recurso').prop('readonly', true);
+
               jq_ui('#recurso').val("");
               jq_ui( "#cantidad" ).focus();
+
+              //jq_ui("label.error[for='recurso']").hide();
+              jq_ui('label.error').hide();
               
               jq_ui(this).val("");
               return false;  
@@ -416,11 +437,8 @@ var jq_va = jQuery.noConflict();
 
             if (ui.content.length === 0) 
             {   
-              jq_ui('label.error').hide();
-
               jq_ui('#sin_resultado').show();
-              return true;
-              
+              return false;
             } 
             else 
             {
@@ -431,28 +449,52 @@ var jq_va = jQuery.noConflict();
 
     });
 
-    function ocultar_recurso_seleccinoado()
-    {
+    
+
+    function mostrar_crear_recurso()
+    {   
+        jq_ui('label.error').hide();
         jq_ui('#recurso').val(""); 
+        jq_ui('#recurso').prop('readonly', true);
+
         jq_ui('#id_recurso').val(""); 
         jq_ui('#descripcion_recurso').val(""); 
-        jq_ui('#div_recurso_seleccionado').hide();
-        jq_ui('#recurso').attr('readonly', false);
-    }
- 
 
-    function mostrar_cargar_recurso()
-    {
         jq_ui("#sin_resultado").hide();
+
         jq_ui("#div_crear_recurso").show();
-        jq_ui( "#recurso_manual" ).focus();
+
+        jq_ui( "#descripcion_recurso" ).focus();
+
+        jq_ui('label.error').hide();
+        jq_ui("label.error[for='recurso']").hide();
+
+        jq_ui('label.error[for="recurso"]').hide();
+
+
+        //return false;
     }
 
     function ocultar_crear_recurso()
     {
+      jq_ui('#recurso').val(""); 
+      jq_ui('#recurso').attr('readonly', false);
+
 
       jq_ui("#div_crear_recurso").hide();
     }
+
+    function ocultar_recurso_seleccionado()
+    {
+        jq_ui('#recurso').prop('readonly', false);
+        jq_ui('#recurso').val(""); 
+ 
+        jq_ui('#id_recurso').val("");
+        jq_ui('#descripcion_recurso').val("");
+        jq_ui('#div_recurso_seleccionado').hide(); 
+      
+    }
+ 
 
 
 
@@ -461,24 +503,57 @@ var jq_va = jQuery.noConflict();
 <script type="text/javascript">
  
   jq_va.validator.addMethod("ingreso_recurso", 
-    function(value, element) 
+      function(value, element) 
       {   
-          var recurso = jq_va( "#recurso" ).val().length;
-          var id_recurso = jq_va( "#id_recurso" ).val().length;
-          
-          var recurso_manual = jq_va( "#recurso_manual" ).val().length;
+        //var recurso = jq_va( "#recurso" ).val().length;
+        //var id_recurso = jq_va( "#id_recurso" ).val().length;
 
-           if(  id_recurso <= 0 && recurso_manual <= 0 )
-           {
-                return false;
-           }
-           else
-           {
-               return true;
-           }  
+        if (jq_ui('#div_crear_recurso').is(":visible"))
+        {
+             //alert("div_crear_recurso aaa");    
+             return true;
+        }
 
-         
-         
+        if (jq_ui('#div_recurso_seleccionado').is(":visible"))
+        {
+             return true;
+        }
+
+        return false;
+
+        /*
+        if(id_recurso > 0) // Tiene el id recurso
+        {
+            return true;
+        }
+
+        /*
+        var recurso_manual = jq_va( "#recurso_manual" ).val().length;
+
+        if(  id_recurso <= 0 && recurso_manual <= 0 )
+        {
+            return false;
+        }
+        else
+        {
+           return true;
+        }  */
+
+        /*
+        var recurso = jq_va( "#recurso" ).val().length;
+        var id_recurso = jq_va( "#id_recurso" ).val().length;
+
+        var recurso_manual = jq_va( "#recurso_manual" ).val().length;
+
+        if(  id_recurso <= 0 && recurso_manual <= 0 )
+        {
+            return false;
+        }
+        else
+        {
+           return true;
+        }  
+         */
       }, 
      "Debe ingresar el recurso"
   );
@@ -487,13 +562,14 @@ var jq_va = jQuery.noConflict();
 
       jq_va('#form_asociar_recurso').validate({
           ignoreTitle: true,
-          rules :{ /* 
+          onfocusout: false,
+          rules :{  
                   recurso: {
-                      ingreso_recurso : true
-                  },*/
+                      ingreso_recurso : true 
+                  },  
                   cantidad: {
                       required : true
-                  },
+                  }, 
                   recurso_manual: {
                       required : true
                   },
@@ -503,21 +579,27 @@ var jq_va = jQuery.noConflict();
 
           },
           messages : {
-                  /*
+                 
                   recurso: {
-                      ingreso_recurso : "Debe seleecionar el recurso o crearlo"
-                  },*/
+                      ingreso_recurso : "Debe seleecionar el recurso o crearlo" 
+                  },  
                   cantidad: {
                       required : "Debe ingresar la cantidad"
-                  },
+                  }, 
                   recurso_manual: {
                       required : "Debe ingresar el nombre del recurso"
                   },
                   unidad_medida: {
                       required : "Debe ingresar la unidad de medida"
                   }
+          },
+          submitHandler: function(form){
+             //alert("bien"); 
+             form.submit();
           } 
 
       });    
   }); 
+
+  
 </script>
